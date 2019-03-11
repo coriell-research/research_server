@@ -1,7 +1,8 @@
 # Coriell Research Server
-*2019.03.11*
+IP address: 10.1.105.11
 
-Set up user accounts
+### Set up user accounts
+*2019.03.11*
 
 ```bash
 ### add users and put them in the research group (Jozef added himself; not documented here)
