@@ -39,6 +39,30 @@ Instructions for activating the environment from anaconda:
 ---
 
 #### Install Software in the Python2.7 Environment
+Install **ngsplot** for Sandra
+
+```bash
+# copied ngsplot to /user/local/programs using Macfusion
+tar xzvf 
+
+# install R dependencies for ngsplot
+R
+install.packages("doMC", dep=T)
+install.packages("caTools", dep=T)
+install.packages("utils", dep=T)
+source("http://bioconductor.org/biocLite.R")
+biocLite( "BSgenome" )
+biocLite( "Rsamtools" )
+biocLite( "ShortRead" )
+
+# tried to set up PATH/environment, but it doesn't seem to be working correctly
+nano /etc/profile.d/ngsplot.sh
+# export the PATH
+export NGSPLOT=/usr/local/programs/ngsplot/bin:$PATH
+
+# set the environemtn variable
+export NGSPLOT=/usr/local/programs/ngsplot
+```
 
 Install **macs2** using pip, as recommended in the macs2 installation guide
 
@@ -66,6 +90,14 @@ conda install -c anaconda numpy
 *2019-03-12*
 
 Installed software from the bix2 software installation log to get the server up and running. Everything installed as root.
+
+-
+
+Install **RSEM** with conda
+
+```bash
+conda install -c bioconda rsem
+```
 
 -
 
