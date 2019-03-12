@@ -5,8 +5,17 @@
 
 ```bash
 su
-conda init
+
+# on Anaconda's recommendation, soft link conda.sh in /etc/profile.d
+ln -s /usr/local/programs/anaconda3/etc/profile.d/conda.sh
+
+# anaconda PATH was not exporting to users correctly, so added another bash file to /etc/profile.d to export the PATH to users at startup/login
+cd /etc/profile.d
+nano anaconda.sh
+# export anaconda path to all users
+export PATH="/usr/local/programs/anaconda3/bin:$PATH"
 ```
+Also commented out the lines in root's .bashrc that were causing a conda environment to be launched at startup
 
 ### Set Up a Python2.7 Environment
 *2019-03-12*
