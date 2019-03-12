@@ -251,7 +251,7 @@ Softlinked libcrypto.so.1.0.0 to libcrypto.so.1.1 as suggested in this github th
 
 ```bash
 su
-cd /usr/local/programs/anaconda/lib
+cd /usr/local/programs/anaconda3/lib
 ln -s libcrypto.so.1.1 libcrypto.so.1.0.0
 ```
 
