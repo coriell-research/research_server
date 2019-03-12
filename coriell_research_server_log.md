@@ -1,6 +1,33 @@
 # Coriell Research Server
 IP address: 10.1.105.11
 
+### Mounting the data disks
+*2019-03-12*
+
+Restarted the server to finish software installation, and the disk field does not automatically mount at start up. Mounted as root.
+
+```bash
+su
+mount /dev/md0 /mnt/data/
+df -h
+Filesystem               Size  Used Avail Use% Mounted on
+/dev/mapper/centos-root  500G   15G  485G   3% /
+devtmpfs                 252G     0  252G   0% /dev
+tmpfs                    252G     0  252G   0% /dev/shm
+tmpfs                    252G   11M  252G   1% /run
+tmpfs                    252G     0  252G   0% /sys/fs/cgroup
+/dev/sda1               1014M  219M  796M  22% /boot
+/dev/mapper/centos-home  1.3T   33M  1.3T   1% /home
+tmpfs                     51G     0   51G   0% /run/user/1002
+tmpfs                     51G     0   51G   0% /run/user/1001
+/dev/md0                 189T   56K  179T   1% /mnt/data
+```
+
+### Software Installation
+*2019-03-12*
+
+For software installation documentation see `software_installation_log.md`
+
 ### Set up user accounts
 *2019.03.11*
 
