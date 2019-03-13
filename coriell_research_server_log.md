@@ -1,6 +1,26 @@
 # Coriell Research Server
 IP address: 10.1.105.11
 
+### Add New Users
+
+*2019-03-13*, Added **Himani Vaidya** as a user
+
+```bash
+su
+useradd -g research hvaidya
+passwd hvaidya # had Himani type her password in
+cd /mnt/data/
+mkdir data_hv
+mkdir data_hv/ncbi
+chown -R hvaidya:research data_hv
+chmod -R 775 data_hv
+cd /home/hvaidya/
+ln -s /mnt/data/data_hv data
+ln -s /mnt/data/data_hv/ncbi ncbi
+chown -R hvaidya:research *
+chmod -R 775 *
+```
+
 ### Mounting the data disks
 *2019-03-12*
 
