@@ -1,5 +1,133 @@
 # Software Installation Log
 
+### Installing R Packages
+*2019-03-14*
+
+Because the anaconda bin came first in the PATH, when you started R it was defaulting to anaconda R. I fixed by editing `/etc/profile.d/anaconda.sh` and `/root/.bashrc` to add anaconda to the end of the PATH instead of the beginning.
+
+```bash
+[kkeith]$ su
+[root]# nano /etc/profile.d/anaconda.sh
+export PATH="/usr/local/programs/anaconda3/bin:$PATH" -> export PATH="$PATH:/usr/local/programs/anaconda3/bin"
+```
+-
+
+Issues installing packages
+
+```bash
+[kkeith]$ su
+[root]# R
+> install.packages('tidyverse')
+# error message is abbreviated
+ERROR: 
+In install.packages("xml2") :
+  installation of package ‘xml2’ had non-zero exit status
+In install.packages("openssl") :
+  installation of package ‘openssl’ had non-zero exit status
+In install.packages("tidyverse") :
+  installation of package ‘tidyverse’ had non-zero exit status
+```
+R had issues finding the paths to xml2 and openssl. On the advice of these GitHub/StackExchange posts, <https://github.com/r-lib/xml2/issues/219> and <https://askubuntu.com/questions/1087411/openssl-and-pkg-config-path-problems-while-configuring-mongolite-package-from-r?rq=1> respectively, I added the PATHS to both in `/etc/profile.d/anaconda.sh`
+
+```bash
+[root]# more /etc/profile.d/anaconda.sh
+# export anaconda path to all users
+export PATH="$PATH:/usr/local/programs/anaconda3/bin"
+
+# export libxml2 path for R to use
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/programs/anaconda3/lib/
+
+# export package configuration path for R to use
+export PKG_CONFIG_PATH="/usr/local/programs/anaconda3/lib/pkgconfig/"
+```
+-
+
+Install packages for everyone
+
+```bash
+[kkeith]$ su
+[root]# R
+> install.pacakges('tidyverse')
+> install.packages('conflicted')
+> install.packages('viridis')
+> install.packages('broom')
+> install.packages('modelr')
+> install.packages('devtools')
+> if (!requireNamespace("BiocManager", quietly = TRUE))
++    install.packages("BiocManager")
+> BiocManager::install("methylKit", version = "3.8")
+> BiocManager::install("plyranges", version = "3.8")
+```
+
+### Install Illumina BaseMount
+*2019-03-14*
+
+Installing the program.
+
+```bash
+[kkeith]$ su
+[root]# bash -c "$(curl -L https://basemount.basespace.illumina.com/install)"
+[root]# mkdir /mnt/basespace
+[root]# chmod 777 /mnt/basespace
+[root]# exit
+[kkeith]$ basemount /mnt/basespace/
+,-----.                        ,--.   ,--.                         ,--.   
+|  |) /_  ,--,--. ,---.  ,---. |   `.'   | ,---. ,--.,--.,--,--, ,-'  '-. 
+|  .-.  \' ,-.  |(  .-' | .-. :|  |'.'|  || .-. ||  ||  ||      \'-.  .-'
+|  '--' /\ '-'  |.-'  `)\   --.|  |   |  |' '-' ''  ''  '|  ||  |  |  |  
+`------'  `--`--'`----'  `----'`--'   `--' `---'  `----' `--''--'  `--' 
+Illumina BaseMount v0.15.96.2155 public  2018-06-04 16:24
+
+Command called:
+    basemount /mnt/basespace/
+From:
+    /home
+
+Starting authentication.
+
+You need to authenticate by opening this URL in a browser:
+  https://basespace.illumina.com/oauth/device?code=r5xk3
+.........
+It worked!
+Your identification has been saved.
+
+Mounting BaseSpace account.
+To unmount, run: basemount --unmount /mnt/basespace
+[kkeith]$ ll /mnt/basespace
+total 1
+drwxr-xr-x. 2 kkeith research   0 Mar 14 09:19 Projects
+-r--r--r--. 1 kkeith research 598 Mar 14 09:19 README
+drwxr-xr-x. 2 kkeith research   0 Mar 14 09:19 Runs
+```
+Setting up a user configuration file so multiple users can use BaseMount (hopefully)
+
+```bash
+[kkeith]$ basemount --unmount /mnt/basespace
+[kkeith]$ mv ~/.basespace/default.cfg ~/.basespace/kkeith.cfg
+[kkeith]$ basemount --config kkeith /mnt/basespace/
+,-----.                        ,--.   ,--.                         ,--.   
+|  |) /_  ,--,--. ,---.  ,---. |   `.'   | ,---. ,--.,--.,--,--, ,-'  '-. 
+|  .-.  \' ,-.  |(  .-' | .-. :|  |'.'|  || .-. ||  ||  ||      \'-.  .-'
+|  '--' /\ '-'  |.-'  `)\   --.|  |   |  |' '-' ''  ''  '|  ||  |  |  |  
+`------'  `--`--'`----'  `----'`--'   `--' `---'  `----' `--''--'  `--' 
+Illumina BaseMount v0.15.96.2155 public  2018-06-04 16:24
+
+Command called:
+    basemount --config kkeith /mnt/basespace/
+From:
+    /home
+
+Api Server: https://api.basespace.illumina.com/
+
+Mounting BaseSpace account.
+To unmount, run: basemount --unmount /mnt/basespace
+[kkeith]$ ll /mnt/basespace/
+total 1
+drwxr-xr-x. 2 kkeith research   0 Mar 14 09:19 Projects
+-r--r--r--. 1 kkeith research 598 Mar 14 09:19 README
+drwxr-xr-x. 2 kkeith research   0 Mar 14 09:19 Runs
+```
+
 ### Make conda path available to all users
 *2019-03-12*
 
