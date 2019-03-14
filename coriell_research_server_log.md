@@ -2,6 +2,25 @@
 IP address: 10.1.105.11
 
 ### Add New Users
+*2019-03-14*, Added **Laura Scheinfeldt** as a usre
+
+```bash
+su
+groupadd permed
+useradd -g permed lscheinfeldt
+passwd lscheinfeldt
+mkdir /mnt/data/data_ls
+mkdir /mnt/data/data_ls/ncbi
+chown -R lscheinfeldt:permed data_ls
+chmod -R 775 data_ls
+cd /home/lscheinfeldt
+ln -s /mnt/data/data_ls data
+ln -s /mnt/data/data_ls ncbi
+chown -R lscheinfeldt:permed *
+chmod -R 775 *
+cd ../
+chmod 775 lscheinfeldt
+```
 
 *2019-03-13*, Added **Himani Vaidya** as a user
 
@@ -19,6 +38,8 @@ ln -s /mnt/data/data_hv data
 ln -s /mnt/data/data_hv/ncbi ncbi
 chown -R hvaidya:research *
 chmod -R 775 *
+cd ../
+chmod 775 hvaidya
 ```
 
 ### Mounting the data disks

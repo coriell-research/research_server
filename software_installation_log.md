@@ -1,5 +1,11 @@
 # Software Installation Log
 
+*2019-03-14* Install **tmux** using conda
+
+```bash
+[root]# conda install -c conda-forge tmux
+```
+
 ### Installing R Packages
 *2019-03-14*
 
