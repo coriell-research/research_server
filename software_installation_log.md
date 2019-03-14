@@ -57,6 +57,11 @@ Install packages for everyone
 +    install.packages("BiocManager")
 > BiocManager::install("methylKit", version = "3.8")
 > BiocManager::install("plyranges", version = "3.8")
+> install.packages('Rtsne')
+> install.packages('umap')
+> install.packages('cowplot')
+> install.packages('ggdendro')
+> install.packages('pheatmap')
 ```
 
 ### Install Illumina BaseMount
