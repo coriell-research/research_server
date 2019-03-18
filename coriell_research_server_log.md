@@ -2,7 +2,24 @@
 IP address: 10.1.105.11
 
 ### Add New Users
-*2019-03-14*, Added **Laura Scheinfeldt** as a usre
+*2019-03-18*, Added **Sandra Deliard** as a user
+
+```bash
+su
+useradd -g research sdeliard
+passwd sdeliard
+mkdir /mnt/data/data_sd
+mkdir /mnt/data/data_sd/ncbi
+chown -R sdeliard:research /mnt/data/data_sd
+chmod -R 775 /mnt/data/data_sd
+cd /home
+ln -s /mnt/data/data_sd sdeliard/data
+ln -s /mnt/data/data_sd/ncbi sdeliard/ncbi
+chown -R sdeliard:research sdeliard/
+chmod -R 775 sdeliard
+```
+
+*2019-03-14*, Added **Laura Scheinfeldt** as a user
 
 ```bash
 su
