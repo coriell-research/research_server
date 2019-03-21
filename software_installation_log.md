@@ -1,5 +1,34 @@
 # Software Installation Log
 
+*2019-03-21* Install **bismark** using conda
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda bismark
+```
+
+*2019-03-18* Install R package **scde**
+
+```bash
+[kkeith]$ su
+[root]# R
+```
+```R
+> if (!requireNamespace("BiocManager", quietly = TRUE))
++    install.packages("BiocManager")
+> BiocManager::install("scde", version = "3.8")
+```
+I forgot there are issues with the version of `scde` in Bioconductor, but remembered after getting an error running the error model. Removed scde install and reinstalled according to instructions on the scde website <http://hms-dbmi.github.io/scde/package.html>
+
+```R
+> remove.packages('scde')
+> require(devtools)
+> devtools::install_version('flexmix', '2.3-13')
+> devtools::install_github('hms-dbmi/scde', build_vignettes = FALSE)
+```
+
+-
+
 *2019-03-14* Install **tmux** using conda
 
 ```bash
