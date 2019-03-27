@@ -1,5 +1,21 @@
 # Software Installation Log
 
+*2018-03-26* Install **Salmon** with conda
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda salmon
+```
+
+*2019-03-25* Install **perl**  and **perl-env** using yum
+
+**NOTE:** Exporting the LD_LIBRARY_PATH which is necessary for running R, prevents yum from working correctly. Solved the problem by logging in as root, commenting out the line exporting LD_LIBRARY_PATH in `/etc/profile.d/anaconda.sh`, exiting, then re-sshing in as root.
+
+```bash
+[kkeith]$ su
+[root]# yum install perl-Env
+```
+
 *2019-03-21* Install **bismark** using conda
 
 ```bash

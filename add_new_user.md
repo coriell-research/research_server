@@ -48,4 +48,4 @@ chown -R <username>:<groupname> *
 cd /home
 chmod -R 775 <username>
 # example: chmod -R 775 kkeith 
-`````
+```

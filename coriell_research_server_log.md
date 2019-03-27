@@ -2,6 +2,59 @@
 IP address: 10.1.105.11
 
 ### Add New Users
+*2019-03-25*, Added **Peace Park** as a user
+
+```bash
+useradd -g research ppark
+passwd ppark
+cd /mnt/data/
+mkdir data_pp
+mkdir data_pp/ncbi
+chown -R ppark:research data_pp
+chmod -R 775 data_pp
+cd /home/ppark/
+ln -s /mnt/data/data_pp data
+ln -s /mnt/data/data_pp/ncbi ncbi
+chown -R ppark:research *
+chmod -R 775 ppark
+```
+
+*2019-03-25*, Added **Shohag Panjarian** as a user
+
+```bash
+useradd -g research spanjarian
+passwd spanjarian
+cd /mnt/data/
+mkdir data_sp
+mkdir data_sp/ncbi
+chown -R spanjarian:research data_sp
+chmod -R 775 data_sp
+cd /home/spanjarian/
+ln -s /mnt/data/data_sp data
+ln -s /mnt/data/data_sp/ncbi ncbi
+chown -R spanjarian:research *
+chmod -R 775 spanjarian
+```
+
+*2019-03-25*, Added **Dara Kusic** as a user
+
+```bash
+su
+useradd -g permed dkusic
+passwd dkusic
+cd /mnt/data/
+mkdir data_dk
+mkdir data_dk/ncbi
+chown -R dkusic:permed data_dk
+chmod -R 775 data_dk
+cd /home/dkusic
+ln -s /mnt/data/data_dk data
+ln -s /mnt/data/data_dk/ncbi ncbi
+chown -R dkusic:permed *
+cd ..
+chmod -R 775 dkusic
+```
+
 *2019-03-18*, Added **Sandra Deliard** as a user
 
 ```bash
