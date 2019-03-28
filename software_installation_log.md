@@ -1,5 +1,13 @@
 # Software Installation Log
 
+*2019-03-28* Install R package **gplots** with R
+
+```bash
+[root]# R
+> install.packages("gplots")
+> q()
+```
+
 *2019-03-28* Install R package **pvclust** with R
 
 ```bash
