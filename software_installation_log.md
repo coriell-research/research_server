@@ -1,6 +1,14 @@
 # Software Installation Log
 
-*2018-03-26* Install **Salmon** with conda
+*2019-03-28* Install R package **pvclust** with R
+
+```bash
+[root]# R
+> install.packages('pvclust')
+> q()
+```
+
+*2019-03-26* Install **Salmon** with conda
 
 ```bash
 [kkeith]$ su
