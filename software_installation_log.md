@@ -1,5 +1,44 @@
 # Software Installation Log
 
+*2019-04-10* Added aliases for all users so it's not necessary to call the entire path for **methclone** and **gdc-client**
+
+```bash
+[kkeith]$ su
+[root]# nano /etc/profile.d/aliases.sh
+alias methclone='/usr/local/programs/methclone-master/bin/methclone'
+alias gdc-client='/usr/local/programs/tcga_gdc-client/gdc-client'
+```
+
+-
+
+*2019-04-10* Install **methclone** according the instructions on the github repository <https://github.com/ShengLi/methclone>. Download the GitHub repository as a zip file and copied it onto the server to `/usr/local/programs/` using Macfusion as root.
+
+```bash
+[kkeith]$ su
+[root]# cd /usr/local/programs/
+[root]# unzip methclone-master.zip
+[root]# cd methclone-master/src/utils/BamTools/
+[root]# mkdir -p lib 
+[root]# make
+[root]# cd /usr/local/programs/methclone-master/src/utils/gzstream/
+[root]# make
+[root]# cd /usr/local/programs/methclone-master/src/
+[root]# mkdir -p ../bin
+[root]# makeme
+```
+The path to use methclone is `/usr/local/programs/methclone-master/bin/methclone`
+
+*2019-04-05* Install the TCGA **gdc-client** by downloading and unzipping the binary distribution from the TCGA GDC website <https://gdc.cancer.gov/access-data/gdc-data-transfer-tool>. Downloaded the Ubuntu binary distribution `gdc-client_v1.4.0_Ubuntu_x64.zip` and copied it onto the server to `/usr/local/programs` using Macfusion as root.
+
+```bash
+[kkeith]$ su
+[root]# cd /usr/local/programs/
+[root]# unzip gdc-client_v1.4.0_Ubuntu_x64.zip
+[root]# mkdir tcga_gdc-client
+[root]# mv gdc* tcga_gdc-client/
+```
+The path to use methclone is `/usr/local/programs/tcga_gdc-client/gdc-client`
+
 *2019-03-28* Install R package **gplots** with R
 
 ```bash
