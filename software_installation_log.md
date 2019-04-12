@@ -1,6 +1,28 @@
 # Software Installation Log
 
-*2019-04-10* Added aliases for all users so it's not necessary to call the entire path for **methclone** and **gdc-client**
+*2019-04-12* Installed QIIME and QIIME2 using conda and according to the instructions on the QIIME website. Each version was installed into its own anaconda environment as suggested in the QIIME documentation <https://docs.qiime2.org/2018.11/install/native/>.
+
+```bash
+[kkeith]$ su
+
+# install qiime1
+[root]# conda create -n qiime1 python=2.7 qiime matplotlib=1.4.3 mock nose -c bioconda
+
+# test the qiime1 environment
+[root]# conda activate qiime1
+(qiime1)[root]# deactivate qiime1
+
+# install qiime2
+[root]# wget https://data.qiime2.org/distro/core/qiime2-2018.11-py35-linux-conda.yml
+[root]# conda env create -n qiime2 --file qiime2-2018.11-py35-linux-conda.yml
+
+# test the qiime2 environment
+[root]# conda activate qiime2
+[root]# qiime --help
+[root]# conda deactivate
+```
+
+*2019-04-12* Added aliases for all users so it's not necessary to call the entire path for **methclone** and **gdc-client**
 
 ```bash
 [kkeith]$ su
@@ -11,7 +33,7 @@ alias gdc-client='/usr/local/programs/tcga_gdc-client/gdc-client'
 
 -
 
-*2019-04-10* Install **methclone** according the instructions on the github repository <https://github.com/ShengLi/methclone>. Download the GitHub repository as a zip file and copied it onto the server to `/usr/local/programs/` using Macfusion as root.
+*2019-04-12* Install **methclone** according the instructions on the github repository <https://github.com/ShengLi/methclone>. Download the GitHub repository as a zip file and copied it onto the server to `/usr/local/programs/` using Macfusion as root.
 
 ```bash
 [kkeith]$ su
