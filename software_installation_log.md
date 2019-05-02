@@ -1,5 +1,37 @@
 # Software Installation Log
 
+*2019-05-02* Install **macs2** with conda, because previous attempt with pip failed
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda macs2
+```
+
+*2019-04-28* - *2019-05-02* Install Bioconductor package **dmrseq** with R
+
+```bash
+[root]# R
+```
+```R
+> BiocManager::install("dmrseq")
+> Warning messages:
+1: In install.packages(pkgs = doing, lib = lib, repos = repos, ...) :
+  installation of package ‘doRNG’ had non-zero exit status
+2: In install.packages(pkgs = doing, lib = lib, repos = repos, ...) :
+  installation of package ‘bumphunter’ had non-zero exit status
+3: In install.packages(pkgs = doing, lib = lib, repos = repos, ...) :
+  installation of package ‘dmrseq’ had non-zero exit status
+```
+
+The `dmrseq` dependency `bumphunter` wouldn't install because its dependency `doRNG` wouldn't install because its dependency `rngtools` wasn't installed, which wouldn't install because its (A) not in CRAN and (B) the latest version needs R 3.6, and (C) doesn't appear to be stable or have documentation. Installed previous version of `rngtools`, 1.2.4, from source (downloaded from <https://cran.r-project.org/src/contrib/Archive/rngtools/>). Then I installed one version back from source of `doRNG`, 1.6.6 (downloaded from <https://cran.r-project.org/src/contrib/Archive/doRNG/>), so it would be compatible with the older version of rngtools. Then `dmrseq` installed and was able to install `bumphunter` with itself. All source archives were downloaded from CRAN repositories to my local computer and uploaded to the server using Macfusion.
+
+```R
+> # 2019-05-02
+> install.packages('/usr/local/programs/R_package_sources/rngtools_1.2.4.tar.gz', repos = NULL)
+> install.packages('/usr/local/programs/R_package_sources/doRNG_1.6.6.tar.gz', repos = NULL)
+> BiocManager::install("dmrseq")
+```
+
 *2019-04-12* Installed QIIME and QIIME2 using conda and according to the instructions on the QIIME website. Each version was installed into its own anaconda environment as suggested in the QIIME documentation <https://docs.qiime2.org/2018.11/install/native/>.
 
 ```bash
