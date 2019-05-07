@@ -49,3 +49,10 @@ cd /home
 chmod -R 775 <username>
 # example: chmod -R 775 kkeith 
 ```
+Add correct `LD_LIBRARY_PATH` to user's `.bash_profile` in order for system R to work correctly.
+
+```bash
+nano /home/username/.bash_profile
+# add line
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/programs/anaconda3/lib/
+```

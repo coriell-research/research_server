@@ -1,11 +1,75 @@
 # Software Installation Log
 
-*2019-05-02* Install **macs2** with conda, because previous attempt with pip failed
+*2019-05-07* Install R package **MethylCal** using R
 
 ```bash
 [kkeith]$ su
+[root]# R
+```
+
+```R
+> install.packages("INLA", repos = c(getOption("repos"), INLA = "https://inla.r-inla-download.org/R/stable"), dep = TRUE)
+> devtools::install_github("lb664/MethylCal", build_opts = c("--no-resave-data", "--no-manual"))
+> library(MethylCal)
+Loading required package: INLA
+Loading required package: Matrix
+Loading required package: sp
+This is INLA_18.07.12 built 2019-05-07 13:40:28 UTC.
+See www.r-inla.org/contact-us for how to get help.
+To enable PARDISO sparse library; see inla.pardiso()
+Loading required package: lattice
+Loading required package: latticeExtra
+Loading required package: RColorBrewer
+```
+
+*2019-05-02* Re-installed **qiime2** using conda and the qiime2 documentation's suggest commands after I broke Anaconda
+
+```bash
+[root]# cd /usr/local/programs
+[root]# wget https://data.qiime2.org/distro/core/qiime2-2019.1-py36-linux-conda.yml
+[root]# conda env create -n qiime2-2019.1 --file qiime2-2019.1-py36-linux-conda.yml
+[root]# rm qiime*
+```
+
+*2019-05-02* Install UCSC's **bedSort** to sort my bed files
+
+```bash
+[root]# conda install -c bioconda ucsc-bedsort
+```
+
+*2019-05-02* Install UCSC's **fetchChromSizes** with conda. Need it to get the chromosome sizes for bedGraphtoBigWig
+
+```bash
+[root]# conda install -c bioconda ucsc-fetchchromsizes
+```
+-
+
+*2019-05-02* Install UCSC's **bedGraphtoBigWig** with conda
+
+```bash
+[root]# conda install -c bioconda ucsc-bedgraphtobigwig
+```
+When I tried to use it, bedGraphtoBigWig gave the following error:
+
+```
+bedGraphToBigWig: error while loading shared libraries: libssl.so.1.0.0: cannot open shared object file: No such file or directory
+```
+bedGraphtoBigWig needs an old Solved the problem by softlinking the library Anaconda had softlinked to libssl.so.1.0.0 (as suggested also in this Stack Exchange post <https://askubuntu.com/questions/339364/libssl-so-10-cannot-open-shared-object-file-no-such-file-or-directory>)
+
+```bash
+[kkeith]$ cd /usr/local/programs/anaconda3/lib
+[kkeith]$ sudo ln -s libssh2.so.1.0.1 libssl.so.1.0.0
+```
+-
+
+*2019-05-02* Install **macs2** with conda, because previous attempt with pip failed. After killing conda a reinstalling all packages, installed it again in the python2.7 conda environment
+
+```bash
+[kkeith]$ su
+[root]# source activate python2.7
 [root]# conda install -c bioconda macs2
 ```
+-
 
 *2019-04-28* - *2019-05-02* Install Bioconductor package **dmrseq** with R
 
@@ -31,8 +95,9 @@ The `dmrseq` dependency `bumphunter` wouldn't install because its dependency `do
 > install.packages('/usr/local/programs/R_package_sources/doRNG_1.6.6.tar.gz', repos = NULL)
 > BiocManager::install("dmrseq")
 ```
+-
 
-*2019-04-12* Installed QIIME and QIIME2 using conda and according to the instructions on the QIIME website. Each version was installed into its own anaconda environment as suggested in the QIIME documentation <https://docs.qiime2.org/2018.11/install/native/>.
+*2019-04-12* Installed QIIME and QIIME2 using conda and according to the instructions on the QIIME website. Each version was installed into its own anaconda environment as suggested in the QIIME documentation <https://docs.qiime2.org/2018.11/install/native/>. **2019-05-02 NOTE:** After I broke Anaconda, had to reinstall Qiime. Ended up updating to a later version because the earlier version downloaded was broken. See further up the file at this date for latest Qiime installation commands.
 
 ```bash
 [kkeith]$ su
@@ -53,6 +118,7 @@ The `dmrseq` dependency `bumphunter` wouldn't install because its dependency `do
 [root]# qiime --help
 [root]# conda deactivate
 ```
+-
 
 *2019-04-12* Added aliases for all users so it's not necessary to call the entire path for **methclone** and **gdc-client**
 
@@ -357,7 +423,7 @@ export NGSPLOT=/usr/local/programs/ngsplot/bin:$PATH
 export NGSPLOT=/usr/local/programs/ngsplot
 ```
 
-Install **macs2** using pip, as recommended in the macs2 installation guide
+Install **macs2** using pip, as recommended in the macs2 installation guide. 2019-05-02 **EDIT** See sucessful installation instructions above.
 
 ```bash
 pip install MACS2
