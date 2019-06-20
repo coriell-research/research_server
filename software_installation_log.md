@@ -1,5 +1,59 @@
 # Software Installation Log
 
+*2019-06-19* Install **perl-GDGraph** using yum
+
+```bash
+[jjelinek]$ su
+[root]# yum install perl-GDGraph
+```
+
+### Install cut&run pipeline
+*2019-06-06*
+
+#### Install the dependencies not alread present on the server
+*2019-06-06* Install **atactk**, following the instructions on its GitHub README, for cut&run pipeline
+
+```bash
+### install dependencies
+# pysam already installed
+[root]# conda install -c conda-forge python-levenshtein
+[root]# conda install -c conda-forge sexpdata
+
+### install atactk
+[root]# cd /usr/local/programs
+[root]# git clone https://github.com/ParkerLab/atactk
+
+### test installation using atactk command make_cut_matrix
+[root]# make_cut_matrix
+usage: make_cut_matrix [-h] (-a | -d) -b BINS [-F EXCLUDE_FLAGS]
+                       [-f INCLUDE_FLAGS] [-o CUT_POINT_OFFSET] [-p PARALLEL]
+                       [-q QUALITY] [-r EXTENSION] [-v] [--version]
+                       BAM-file-of-aligned-reads BED-file-of-motifs
+make_cut_matrix: error: the following arguments are required: -b/--bins, BAM-file-of-aligned-reads, BED-file-of-motifs
+```
+-
+
+Install **bedops** using conda for cut&run pipeline
+
+```bash
+[root]# conda install -c bioconda bedops
+```
+-
+
+Install **MEME** using conda for cut&run pipeline
+
+```bash
+[root]# conda install -c bioconda meme
+```
+-
+
+Install **picard** using conda for cut&run pipeline
+
+```bash
+[root]# conda install -c bioconda picard
+```
+---
+
 *2019-05-07* Install R package **MethylCal** using R
 
 ```bash

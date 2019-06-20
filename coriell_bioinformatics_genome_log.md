@@ -1,6 +1,14 @@
 ## Coriell Bioinformatics Genome Log
 
 ### hg38
+*2019-05-14*
+Downloaded the Ensembl gene annotations in GFF3 format from the NCBI ftp site
+
+```bash
+[kkeith]$ cd /mnt/data/gdata/human/hg38
+[kkeith]$ wget ftp://ftp.ensembl.org/pub/release-85/gff3/homo_sapiens/Homo_sapiens.GRCh38.85.gff3.gz
+```
+
 *2019-05-02* 
 Used UCSC's fetchChromSizes to get the chromosome size file necessary for many of their tools
 
