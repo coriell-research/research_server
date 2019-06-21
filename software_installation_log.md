@@ -1,5 +1,12 @@
 # Software Installation Log
 
+*2019-06-21* Install **epic2** using conda
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda epic2 
+```
+
 *2019-06-19* Install **perl-GDGraph** using yum
 
 ```bash
