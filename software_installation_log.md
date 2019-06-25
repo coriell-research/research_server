@@ -1,5 +1,27 @@
 # Software Installation Log
 
+*2019-06-25* Inall **jq** to parse json files Gencove API returns on the commandline
+
+```bash
+[kkeith]$ su
+[root]# conda install -c conda-forge jq
+```
+
+*2019-06-25* Install **Gencove API** to download data using pip.
+
+```bash
+[kkeith]$ su
+[root]# pip install gencove
+```
+
+*2019-06-22* Install **libiconv** using conda, which MEME needs to run
+
+```bash
+[kkeith]$ conda install -c conda-forge libiconv
+[root]# conda install -c conda-forge libiconv
+```
+-
+
 *2019-06-21* Install **epic2** using conda
 
 ```bash
