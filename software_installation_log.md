@@ -1,6 +1,35 @@
 # Software Installation Log
 
-*2019-06-25* Inall **jq** to parse json files Gencove API returns on the commandline
+### Weird Java Error
+*2019-07-11*
+
+When I tried to run `fastqc`, I got a weird error
+
+```bash
+[kkeith]$ fastqc
+Exception in thread "main" java.lang.NullPointerException
+```
+Tried updating/installing openjdk, but that didn't work
+
+```bash
+[root]# su -c "yum install java-1.8.0-openjdk"
+```
+Tried to update fastqc (which was installed using conda) and got another weird error (below, only showing relevant line).
+
+```bash
+[root]# conda update fastqc
+OSError: /lib64/libstdc++.so.6: version `CXXABI_1.3.8' not found (required by /usr/local/programs/anaconda3/lib/././libicuuc.so.58
+```
+Turned out the softlink in the anaconda library was broken. Fixed the issue by adding the following soft links
+
+```bash
+[root]# ln -s /usr/local/programs/anaconda3/lib/libstdc++.so.6.0.25 /usr/local/programs/anaconda3/lib/libstdc++.so
+[root]# ln -s /usr/local/programs/anaconda3/lib/libstdc++.so.6.0.25 /usr/local/programs/anaconda3/lib/libstdc++.so.6
+```
+
+---
+
+*2019-06-25* Install **jq** to parse json files Gencove API returns on the commandline
 
 ```bash
 [kkeith]$ su
