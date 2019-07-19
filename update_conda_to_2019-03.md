@@ -116,10 +116,36 @@ Turned off activating the conda environment by default
 
 # reinstall programs in a loop
 for i in $(cut -f1 2019-07-15_installed_programs.tsv); do conda install $i --yes; done
+# The bioconda packages couldn't be found? So did loop again with the bioconda channel
+for i in $(cut -f1 2019-07-15_installed_programs.tsv); do conda install -c bioconda $i --yes; done
+
+# update everything to latest version
+[root]# conda update conda
 ```
 **Note to Self:** Next time, add a print statement in the loop, so you can tell what the problem is if progress stalls.
 
+#### Re-install programs installed in special conda environments
+*2019-07-17*
 
+```bash
+[root]# conda create --name python2.7 python=2.7
+[root]# conda activate python2.7
+(python2.7)[root]# conda install -c bioconda macs2
+(python2.7)[root]# macs2
+usage: macs2 [-h] [--version]
+             {callpeak,bdgpeakcall,bdgbroadcall,bdgcmp,bdgopt,cmbreps,bdgdiff,filterdup,predictd,pileup,randsample,refinepeak}
+             ...
+macs2: error: too few arguments
+(python2.7)[root]# conda deactivate
+[root]# cd /usr/local/programs/
+[root]# wget https://data.qiime2.org/distro/core/qiime2-2019.4-py36-linux-conda.yml
+[root]# conda env create -n qiime2 --file qiime2-2019.4-py36-linux-conda.yml
+[root]# conda activate qiime2
+(qiime2)[root]# qiime --version
+q2cli version 2019.4.0
+Run `qiime info` for more version details
+[root]# conda deactivate
+```
 
 
 

@@ -3,6 +3,8 @@
 ### Weird Java Error
 *2019-07-11*
 
+*2019-07-19* **NOTE:** Ended up reinstalling conda and all programs, see `update_conda_to_2019-03.md`
+
 When I tried to run `fastqc`, I got a weird error
 
 ```bash
