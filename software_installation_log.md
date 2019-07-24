@@ -1,5 +1,17 @@
 # Software Installation Log
 
+Install **magicblast**
+
+```bash
+cd /usr/local/programs/
+sudo wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/magicblast/LATEST/ncbi-magicblast-1.4.0-x64-linux.tar.gz
+sudo tar -xzvf ncbi-magicblast-1.4.0-x64-linux.tar.gz
+rm ncbi-magicblast-1.4.0-x64-linux.tar.gz
+
+sudo nano /etc/profile.d/magic_blast.sh
+```
+-
+
 Install **bwa** using conda
 
 ```bash
