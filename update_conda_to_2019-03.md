@@ -146,6 +146,62 @@ q2cli version 2019.4.0
 Run `qiime info` for more version details
 [root]# conda deactivate
 ```
+### Error Resolution
+*2019-07-22*
 
+Got the following error when trying to run `bedGraphtoBigWig`:
 
+```bash
+bedGraphToBigWig: error while loading shared libraries: libssl.so.1.0.0: cannot open shared object file: No such file or directory
+```
+Based on Googling (and my memory of this happening before), mainly this StackExchange post <https://askubuntu.com/questions/339364/libssl-so-10-cannot-open-shared-object-file-no-such-file-or-directory>, made a softlink with the name from the error in the anaconda3 library.
 
+```bash
+[kkeith]$ ll /usr/local/programs/anaconda3/lib/libssl*
+-rw-rw-r--. 2 root root 1237640 Mar  7 10:42 /usr/local/programs/anaconda3/lib/libssl.a
+lrwxrwxrwx. 1 root root      13 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libssl.so -> libssl.so.1.1
+-rwxrwxr-x. 2 root root  695960 Mar  7 10:42 /usr/local/programs/anaconda3/lib/libssl.so.1.1
+[kkeith]$ sudo ln -s /usr/local/programs/anaconda3/lib/libssl.so /usr/local/programs/anaconda3/lib/libssl.so.1.0.0
+[kkeith]$ ll /usr/local/programs/anaconda3/lib/libssl*
+-rw-rw-r--. 2 root root 1237640 Mar  7 10:42 /usr/local/programs/anaconda3/lib/libssl.a
+lrwxrwxrwx. 1 root root      13 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libssl.so -> libssl.so.1.1
+lrwxrwxrwx. 1 root root      43 Jul 22 11:00 /usr/local/programs/anaconda3/lib/libssl.so.1.0.0 -> /usr/local/programs/anaconda3/lib/libssl.so
+-rwxrwxr-x. 2 root root  695960 Mar  7 10:42 /usr/local/programs/anaconda3/lib/libssl.so.1.1
+```
+-
+After resolving the error above, got a very similar error.
+
+```bash
+bedGraphToBigWig: error while loading shared libraries: libcrypto.so.1.0.0: cannot open shared object file: No such file or directory
+```
+Resolved it by softlink as well
+
+```bash
+[kkeith]$ ll /usr/local/programs/anaconda3/lib/libcrypto*
+-rw-rw-r--. 1 root root 6708332 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libcrypto.a
+lrwxrwxrwx. 1 root root      16 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libcrypto.so -> libcrypto.so.1.1
+-rwxrwxr-x. 1 root root 3452736 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libcrypto.so.1.1
+[kkeith]$ sudo ln -s /usr/local/programs/anaconda3/lib/libcrypto.so.1.1 /usr/local/programs/anaconda3/lib/libcrypto.so.1.0.0
+[kkeith]$ ll /usr/local/programs/anaconda3/lib/libcrypto*
+-rw-rw-r--. 1 root root 6708332 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libcrypto.a
+lrwxrwxrwx. 1 root root      16 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libcrypto.so -> libcrypto.so.1.1
+lrwxrwxrwx. 1 root root      50 Jul 22 11:03 /usr/local/programs/anaconda3/lib/libcrypto.so.1.0.0 -> /usr/local/programs/anaconda3/lib/libcrypto.so.1.1
+-rwxrwxr-x. 1 root root 3452736 Jul 15 12:48 /usr/local/programs/anaconda3/lib/libcrypto.so.1.1
+```
+#### deepTools didn't reinstall
+
+Re-installed deepTools using conda
+
+```bash
+[kkeith]$ su
+[root]# tmux new -s deeptools
+[root]# conda install -c bioconda deeptools
+```
+That didn't work because there's some sort of dependency conflict, so re-installed deeptools in its own conda environment.
+
+```bash
+[kkeith]$ su
+[root]# conda create --name deeptools
+[root]# conda activate deeptools
+(deeptools)[root]# conda install -c bioconda deeptools
+```

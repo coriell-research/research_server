@@ -1,5 +1,100 @@
 # Software Installation Log
 
+Install **bwa** using conda
+
+```bash
+[kkeith]$
+[root]# su
+[root]# tmux new -s bwa
+[root]# conda install -c bioconda bwa
+[detached (from session bwa)]
+[root]# bwa
+
+Program: bwa (alignment via Burrows-Wheeler transformation)
+Version: 0.7.17-r1188
+Contact: Heng Li <lh3@sanger.ac.uk>
+
+Usage:   bwa <command> [options]
+
+Command: index         index sequences in the FASTA format
+         mem           BWA-MEM algorithm
+         fastmap       identify super-maximal exact matches
+         pemerge       merge overlapping paired ends (EXPERIMENTAL)
+         aln           gapped/ungapped alignment
+         samse         generate alignment (single ended)
+         sampe         generate alignment (paired ended)
+         bwasw         BWA-SW for long queries
+
+         shm           manage indices in shared memory
+         fa2pac        convert FASTA to PAC format
+         pac2bwt       generate BWT from PAC
+         pac2bwtgen    alternative algorithm for generating BWT
+         bwtupdate     update .bwt to the new format
+         bwt2sa        generate SA from BWT and Occ
+
+Note: To use BWA, you need to first index the genome with `bwa index'.
+      There are three alignment algorithms in BWA: `mem', `bwasw', and
+      `aln/samse/sampe'. If you are not sure which to use, try `bwa mem'
+      first. Please `man ./bwa.1' for the manual.
+[root]# tmux kill-session -t bwa
+[root]# exit
+```
+
+### Install GATK
+*2019-07-22*
+
+```bash
+[kkeith]$ su
+[root]# conda config
+[root]# tmux new -s gatk
+[root]# conda create --name gatk
+[root]# conda activate gatk
+(gatk)[root]# conda install gatk
+(gatk)[root]# gatk GATK jar file not found. Have you run "gatk-register"?
+(gatk)[root]# gatk-register
+  It looks like GATK has not yet been installed.
+
+  Usage: gatk-register /path/to/GenomeAnalysisTK[-3.8.tar.bz2|.jar]
+
+  Due to license restrictions, this recipe cannot distribute 
+  and install GATK directly. To fully install GATK, you must 
+  download a licensed copy of GATK from the Broad Institute: 
+    https://www.broadinstitute.org/gatk/download/ 
+  and run (after installing this package):
+    gatk-register /path/to/GenomeAnalysisTK[-3.8.tar.bz2|.jar], 
+   This will copy GATK into your conda environment.
+```
+Went to the link, downloaded the file, and transferred the file to `/usr/local/programs/` and unzipped the file using Macfusion
+
+-
+
+None of the files I tried worked for `conda`, so I downloaded the file to `/usr/local/progams/` and unzipped it. GATK is ready to go then, you just need to export the path and set up an alias
+
+```bash
+# remove conda environment because we don't need that now
+[root]# conda remove --name gatk --all
+
+# exported gatk path to everyone's ~/.bash_profile
+[kkeith]$ for i in /home/*/.bash_profile; do echo 'export PATH=$PATH:/usr/local/programs/gatk-4.1.2.0/gatk' >> $i; done
+-bash: /home/hvaidya/.bash_profile: Permission denied
+-bash: /home/lscheinfeldt/.bash_profile: Permission denied
+[kkeith]$ su
+[root]# echo 'export PATH=$PATH:/usr/local/programs/gatk-4.1.2.0/gatk' >> /home/hvaidya/.bash_profile
+[root]# echo 'export PATH=$PATH:/usr/local/programs/gatk-4.1.2.0/gatk' >> /home/lscheinfeldt/.bash_profile
+
+# added alias for gatk to alias file
+[kkeith]$ su
+[root]# nano /etc/profile.d/aliases.sh
+[root]# less /etc/profile.d/aliases.sh
+alias methclone='/usr/local/programs/methclone-master/bin/methclone'
+
+alias gdc-client='/usr/local/programs/tcga_gdc-client/gdc-client'
+
+alias methclone2='/usr/local/programs/methclone2/bin/methclone'
+
+alias gatk='/usr/local/programs/gatk-4.1.2.0/gatk'
+```
+
 ### Weird Java Error
 *2019-07-11*
 
