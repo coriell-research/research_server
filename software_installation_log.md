@@ -1,6 +1,108 @@
 # Software Installation Log
 
-Install **magicblast**
+*2019-07-25*
+Install **lumpy-sv** using conda
+
+```bash
+[root]# conda create --name lumpy
+[root]# conda activate lumpy
+(lumpy)[root]# conda install -c bioconda lumpy-sv
+(lumpy)[root]# lumpy
+
+Program: ********** (v 0.2.13)
+Author:  Ryan Layer (rl6sf@virginia.edu)
+Summary: Find structural variations in various signals.
+
+Usage:   ********** [OPTIONS] 
+
+Options: 
+	-g	Genome file (defines chromosome order)
+	-e	Show evidence for each call
+	-w	File read windows size (default 1000000)
+	-mw	minimum weight for a call
+	-msw	minimum per-sample weight for a call
+	-tt	trim threshold
+	-x	exclude file bed file
+	-t	temp file prefix, must be to a writeable directory
+	-P	output probability curve for each variant
+	-b	output BEDPE instead of VCF
+	-sr	bam_file:<file name>,
+		id:<sample name>,
+		back_distance:<distance>,
+		min_mapping_threshold:<mapping quality>,
+		weight:<sample weight>,
+		min_clip:<minimum clip length>,
+		read_group:<string>
+
+	-pe	bam_file:<file name>,
+		id:<sample name>,
+		histo_file:<file name>,
+		mean:<value>,
+		stdev:<value>,
+		read_length:<length>,
+		min_non_overlap:<length>,
+		discordant_z:<z value>,
+		back_distance:<distance>,
+		min_mapping_threshold:<mapping quality>,
+		weight:<sample weight>,
+		read_group:<string>
+
+	-bedpe	bedpe_file:<bedpe file>,
+		id:<sample name>,
+		weight:<sample weight>
+(lumpy)[root]# conda deactivate
+```
+-
+
+*2019-07-25*
+Install bioconductor package **QDNAseq**
+
+```bash
+[root]# R
+> if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+> BiocManager::install("QDNAseq")
+> q()
+```
+
+### Install CNVnator
+*2019-07-25*
+
+**NOTE:** NOT INSTALLED
+
+ATTEMPT to install **CNVnator**, first you have to install **ROOT**, a data analysis framework. I downloaded the CentOS binaries to my computer and uploaded them to the server as root using Macfusion to `/usr/local/programs`
+
+```bash
+# from /usr/local/programs
+# unpack the binaries
+[root]# tar -xvzf root_v6.16.00.Linux-centos7-x86_64-gcc4.8.tar.gz
+```
+Edited my `.bash_profile` only, `/home/kkeith/.bash_profile` to include the ROOT PATH as directed in the ROOT installation as a test. Then I installed CNVnator as directed in the CNVnator GitHub README installation instructions <https://github.com/abyzovlab/CNVnator>
+
+```bash
+# from /usr/local/programs
+[root]# git clone https://github.com/abyzovlab/CNVnator.git
+[root]# cd CNVnator/
+[root]# ln -s /usr/local/programs/anaconda3/bin/samtools samtools
+
+unzip CNVnator_v0.4.zip
+tar -xzvf samtools-1.9.tar.bz2 
+cd samtools
+make
+cd CNVnator_v0.4/
+ln -s /usr/local/programs/samtools samtools
+make
+```
+```bash
+rpm -Uvh alien-8.90-3.el7.nux.noarch.rpm 
+```
+
+-
+
+*2019-07-24*
+Jozef installed **magicblast**
+
 
 ```bash
 cd /usr/local/programs/
@@ -11,7 +113,7 @@ rm ncbi-magicblast-1.4.0-x64-linux.tar.gz
 sudo nano /etc/profile.d/magic_blast.sh
 ```
 -
-
+*2019-07-24*
 Install **bwa** using conda
 
 ```bash
