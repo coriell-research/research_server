@@ -1,5 +1,30 @@
 # Software Installation Log
 
+*2019-07-31* Install **imagemagick** using conda
+
+```bash
+[kkeith]$ su
+[root]# conda new --name imagemagick
+[root]# conda activate imagemagick
+[root]# conda install -c conda-forge imagemagick
+[root]# magick
+Error: Invalid argument or not enough arguments
+
+Usage: magick tool [ {option} | {image} ... ] {output_image}
+Usage: magick [ {option} | {image} ... ] {output_image}
+       magick [ {option} | {image} ... ] -script {filename} [ {script_args} ...]
+       magick -help | -version | -usage | -list {option}
+
+[root]# exit
+```
+
+*2019-07-29* Install **refgenie** using pip
+
+```bash
+[kkeith]$ su
+[root]# pip install refgenie
+```
+
 *2019-07-25*
 Install **lumpy-sv** using conda
 
