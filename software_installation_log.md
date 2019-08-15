@@ -1,6 +1,7 @@
 # Software Installation Log
 
 *2019-08-16* JJ changed hostname from localhost to **cbix**
+
 added the following line to /etc/sysconfig/network
 
     HOSTNAME=cbix
