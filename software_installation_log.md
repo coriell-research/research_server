@@ -2,6 +2,7 @@
 
 *2019-08-16* JJ changed hostname from localhost to **cbix**
 added the following line to /etc/sysconfig/network
+
     HOSTNAME=cbix
 
 edited /etc/hosts
@@ -11,6 +12,7 @@ by changing the first line
     ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
 issued a command
+
     sudo hostname cbix
 
 
