@@ -1,5 +1,28 @@
 # Software Installation Log
 
+*2019-08-16* JJ changed hostname from localhost to **cbix**
+added the following line to /etc/sysconfig/network
+HOSTNAME=cbix
+
+after change
+$ cat /etc/sysconfig/network
+# Created by anaconda
+HOSTNAME=cbix
+
+edited /etc/hosts
+commented out the first line
+added the second line
+after change
+
+$ cat /etc/hosts
+#127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+127.0.0.1       cbix
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+issued a command
+sudo hostname cbix
+
+
 *2019-07-31* Install **imagemagick** using conda
 
 ```bash
