@@ -4,18 +4,9 @@
 added the following line to /etc/sysconfig/network
 HOSTNAME=cbix
 
-after change
-$ cat /etc/sysconfig/network
-# Created by anaconda
-HOSTNAME=cbix
-
 edited /etc/hosts
-commented out the first line
-added the second line
-after change
+by changing the first line
 
-$ cat /etc/hosts
-#127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 127.0.0.1       cbix
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
