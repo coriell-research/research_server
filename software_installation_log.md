@@ -1,5 +1,52 @@
 # Software Installation Log
 
+*2019-08-26* Installed UCSC's **bedClip** using conda
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda ucsc-bedclip
+```
+
+*2019-08-03* Tried to install **CNVkit** using conda
+
+```bash
+[kkeith]$ su
+[root]# conda create --name cnvkit
+[root]# conda activate cnvkit
+(cnvkit)[kkeith]$ conda install -c bioconda cnvkit
+Solving environment: failed
+
+# >>>>>>>>>>>>>>>>>>>>>> ERROR REPORT <<<<<<<<<<<<<<<<<<<<<<
+
+    Traceback (most recent call last):
+      File "/usr/local/programs/anaconda3/lib/python3.7/site-packages/conda/exceptions.py", line 1049, in __call__
+        return func(*args, **kwargs)
+      File "/usr/local/programs/anaconda3/lib/python3.7/site-packages/conda/cli/main.py", line 84, in _main
+        exit_code = do_call(args, p)
+      File "/usr/local/programs/anaconda3/lib/python3.7/site-packages/conda/cli/conda_argparse.py", line 82, in do_call
+        exit_code = getattr(module, func_name)(args, parser)
+      File "/usr/local/programs/anaconda3/lib/python3.7/site-packages/conda/cli/main_install.py", line 20, in execute
+        install(args, parser, 'install')
+      File "/usr/local/programs/anaconda3/lib/python3.7/site-packages/conda/cli/install.py", line 319, in install
+        handle_txn(unlink_link_transaction, prefix, args, newenv)
+    UnboundLocalError: local variable 'unlink_link_transaction' referenced before assignment
+
+`$ /usr/local/programs/anaconda3/bin/conda install -c bioconda cnvkit`
+An unexpected error has occurred. Conda has prepared the above report.
+
+### 2019-08-13; sucessfully installed with pip
+[root]# pip install cnvkit
+
+### remove now unnecessary conda environment
+[root]# conda env remove --name cnvkit
+
+Remove all packages in environment /usr/local/programs/anaconda3/envs/cnvkit:
+
+
+```
+
+-
+
 *2019-07-31* Install **imagemagick** using conda
 
 ```bash
