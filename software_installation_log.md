@@ -6,6 +6,30 @@
 [kkeith]$ su
 [root]# conda install -c bioconda ucsc-bedclip
 ```
+-
+
+*2019-08-16* JJ changed hostname from localhost to **cbix**
+
+added the following line to /etc/sysconfig/network
+
+```bash
+    HOSTNAME=cbix
+```
+
+edited /etc/hosts
+by changing the first line
+
+```bash
+    127.0.0.1       cbix
+    ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+```
+
+issued a command
+
+```bash
+    sudo hostname cbix
+```
+-
 
 *2019-08-03* Tried to install **CNVkit** using conda
 
@@ -41,8 +65,6 @@ An unexpected error has occurred. Conda has prepared the above report.
 [root]# conda env remove --name cnvkit
 
 Remove all packages in environment /usr/local/programs/anaconda3/envs/cnvkit:
-
-
 ```
 
 -
