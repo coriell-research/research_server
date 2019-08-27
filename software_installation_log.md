@@ -6,7 +6,7 @@
 [kkeith]$ su
 [root]# conda install -c bioconda ucsc-bedclip
 ```
--
+---
 
 *2019-08-16* JJ changed hostname from localhost to **cbix**
 
@@ -29,7 +29,7 @@ issued a command
 ```bash
     sudo hostname cbix
 ```
--
+---
 
 *2019-08-03* Tried to install **CNVkit** using conda
 
@@ -66,8 +66,7 @@ An unexpected error has occurred. Conda has prepared the above report.
 
 Remove all packages in environment /usr/local/programs/anaconda3/envs/cnvkit:
 ```
-
--
+---
 
 *2019-07-31* Install **imagemagick** using conda
 
@@ -86,6 +85,7 @@ Usage: magick [ {option} | {image} ... ] {output_image}
 
 [root]# exit
 ```
+---
 
 *2019-07-29* Install **refgenie** using pip
 
@@ -93,6 +93,7 @@ Usage: magick [ {option} | {image} ... ] {output_image}
 [kkeith]$ su
 [root]# pip install refgenie
 ```
+---
 
 *2019-07-25*
 Install **lumpy-sv** using conda
@@ -146,7 +147,7 @@ Options:
 		weight:<sample weight>
 (lumpy)[root]# conda deactivate
 ```
--
+---
 
 *2019-07-25*
 Install bioconductor package **QDNAseq**
@@ -191,8 +192,7 @@ make
 ```bash
 rpm -Uvh alien-8.90-3.el7.nux.noarch.rpm 
 ```
-
--
+---
 
 *2019-07-24*
 Jozef installed **magicblast**
@@ -206,7 +206,8 @@ rm ncbi-magicblast-1.4.0-x64-linux.tar.gz
 
 sudo nano /etc/profile.d/magic_blast.sh
 ```
--
+---
+
 *2019-07-24*
 Install **bwa** using conda
 
@@ -274,7 +275,7 @@ Note: To use BWA, you need to first index the genome with `bwa index'.
 ```
 Went to the link, downloaded the file, and transferred the file to `/usr/local/programs/` and unzipped the file using Macfusion
 
--
+---
 
 None of the files I tried worked for `conda`, so I downloaded the file to `/usr/local/progams/` and unzipped it. GATK is ready to go then, you just need to export the path and set up an alias
 
@@ -331,7 +332,6 @@ Turned out the softlink in the anaconda library was broken. Fixed the issue by a
 [root]# ln -s /usr/local/programs/anaconda3/lib/libstdc++.so.6.0.25 /usr/local/programs/anaconda3/lib/libstdc++.so
 [root]# ln -s /usr/local/programs/anaconda3/lib/libstdc++.so.6.0.25 /usr/local/programs/anaconda3/lib/libstdc++.so.6
 ```
-
 ---
 
 *2019-06-25* Install **jq** to parse json files Gencove API returns on the commandline
@@ -340,6 +340,7 @@ Turned out the softlink in the anaconda library was broken. Fixed the issue by a
 [kkeith]$ su
 [root]# conda install -c conda-forge jq
 ```
+---
 
 *2019-06-25* Install **Gencove API** to download data using pip.
 
@@ -347,6 +348,7 @@ Turned out the softlink in the anaconda library was broken. Fixed the issue by a
 [kkeith]$ su
 [root]# pip install gencove
 ```
+---
 
 *2019-06-22* Install **libiconv** using conda, which MEME needs to run
 
@@ -354,7 +356,7 @@ Turned out the softlink in the anaconda library was broken. Fixed the issue by a
 [kkeith]$ conda install -c conda-forge libiconv
 [root]# conda install -c conda-forge libiconv
 ```
--
+---
 
 *2019-06-21* Install **epic2** using conda
 
@@ -362,6 +364,7 @@ Turned out the softlink in the anaconda library was broken. Fixed the issue by a
 [kkeith]$ su
 [root]# conda install -c bioconda epic2 
 ```
+---
 
 *2019-06-19* Install **perl-GDGraph** using yum
 
@@ -394,21 +397,21 @@ usage: make_cut_matrix [-h] (-a | -d) -b BINS [-F EXCLUDE_FLAGS]
                        BAM-file-of-aligned-reads BED-file-of-motifs
 make_cut_matrix: error: the following arguments are required: -b/--bins, BAM-file-of-aligned-reads, BED-file-of-motifs
 ```
--
+---
 
 Install **bedops** using conda for cut&run pipeline
 
 ```bash
 [root]# conda install -c bioconda bedops
 ```
--
+---
 
 Install **MEME** using conda for cut&run pipeline
 
 ```bash
 [root]# conda install -c bioconda meme
 ```
--
+---
 
 Install **picard** using conda for cut&run pipeline
 
@@ -438,6 +441,7 @@ Loading required package: lattice
 Loading required package: latticeExtra
 Loading required package: RColorBrewer
 ```
+---
 
 *2019-05-02* Re-installed **qiime2** using conda and the qiime2 documentation's suggest commands after I broke Anaconda
 
@@ -447,19 +451,21 @@ Loading required package: RColorBrewer
 [root]# conda env create -n qiime2-2019.1 --file qiime2-2019.1-py36-linux-conda.yml
 [root]# rm qiime*
 ```
+---
 
 *2019-05-02* Install UCSC's **bedSort** to sort my bed files
 
 ```bash
 [root]# conda install -c bioconda ucsc-bedsort
 ```
+---
 
 *2019-05-02* Install UCSC's **fetchChromSizes** with conda. Need it to get the chromosome sizes for bedGraphtoBigWig
 
 ```bash
 [root]# conda install -c bioconda ucsc-fetchchromsizes
 ```
--
+---
 
 *2019-05-02* Install UCSC's **bedGraphtoBigWig** with conda
 
@@ -477,7 +483,7 @@ bedGraphtoBigWig needs an old Solved the problem by softlinking the library Anac
 [kkeith]$ cd /usr/local/programs/anaconda3/lib
 [kkeith]$ sudo ln -s libssh2.so.1.0.1 libssl.so.1.0.0
 ```
--
+---
 
 *2019-05-02* Install **macs2** with conda, because previous attempt with pip failed. After killing conda a reinstalling all packages, installed it again in the python2.7 conda environment
 
@@ -486,7 +492,7 @@ bedGraphtoBigWig needs an old Solved the problem by softlinking the library Anac
 [root]# source activate python2.7
 [root]# conda install -c bioconda macs2
 ```
--
+---
 
 *2019-04-28* - *2019-05-02* Install Bioconductor package **dmrseq** with R
 
@@ -512,7 +518,7 @@ The `dmrseq` dependency `bumphunter` wouldn't install because its dependency `do
 > install.packages('/usr/local/programs/R_package_sources/doRNG_1.6.6.tar.gz', repos = NULL)
 > BiocManager::install("dmrseq")
 ```
--
+---
 
 *2019-04-12* Installed QIIME and QIIME2 using conda and according to the instructions on the QIIME website. Each version was installed into its own anaconda environment as suggested in the QIIME documentation <https://docs.qiime2.org/2018.11/install/native/>. **2019-05-02 NOTE:** After I broke Anaconda, had to reinstall Qiime. Ended up updating to a later version because the earlier version downloaded was broken. See further up the file at this date for latest Qiime installation commands.
 
@@ -535,7 +541,7 @@ The `dmrseq` dependency `bumphunter` wouldn't install because its dependency `do
 [root]# qiime --help
 [root]# conda deactivate
 ```
--
+---
 
 *2019-04-12* Added aliases for all users so it's not necessary to call the entire path for **methclone** and **gdc-client**
 
@@ -546,7 +552,7 @@ alias methclone='/usr/local/programs/methclone-master/bin/methclone'
 alias gdc-client='/usr/local/programs/tcga_gdc-client/gdc-client'
 ```
 
--
+---
 
 *2019-04-12* Install **methclone** according the instructions on the github repository <https://github.com/ShengLi/methclone>. Download the GitHub repository as a zip file and copied it onto the server to `/usr/local/programs/` using Macfusion as root.
 
@@ -576,6 +582,8 @@ The path to use methclone is `/usr/local/programs/methclone-master/bin/methclone
 ```
 The path to use methclone is `/usr/local/programs/tcga_gdc-client/gdc-client`
 
+---
+
 *2019-03-28* Install R package **gplots** with R
 
 ```bash
@@ -583,6 +591,7 @@ The path to use methclone is `/usr/local/programs/tcga_gdc-client/gdc-client`
 > install.packages("gplots")
 > q()
 ```
+---
 
 *2019-03-28* Install R package **pvclust** with R
 
@@ -591,6 +600,7 @@ The path to use methclone is `/usr/local/programs/tcga_gdc-client/gdc-client`
 > install.packages('pvclust')
 > q()
 ```
+---
 
 *2019-03-26* Install **Salmon** with conda
 
@@ -598,6 +608,7 @@ The path to use methclone is `/usr/local/programs/tcga_gdc-client/gdc-client`
 [kkeith]$ su
 [root]# conda install -c bioconda salmon
 ```
+---
 
 *2019-03-25* Install **perl**  and **perl-env** using yum
 
@@ -607,6 +618,7 @@ The path to use methclone is `/usr/local/programs/tcga_gdc-client/gdc-client`
 [kkeith]$ su
 [root]# yum install perl-Env
 ```
+---
 
 *2019-03-21* Install **bismark** using conda
 
@@ -614,6 +626,7 @@ The path to use methclone is `/usr/local/programs/tcga_gdc-client/gdc-client`
 [kkeith]$ su
 [root]# conda install -c bioconda bismark
 ```
+---
 
 *2019-03-18* Install R package **scde**
 
@@ -634,8 +647,7 @@ I forgot there are issues with the version of `scde` in Bioconductor, but rememb
 > devtools::install_version('flexmix', '2.3-13')
 > devtools::install_github('hms-dbmi/scde', build_vignettes = FALSE)
 ```
-
--
+---
 
 *2019-03-14* Install **tmux** using conda
 
@@ -846,15 +858,14 @@ Install **macs2** using pip, as recommended in the macs2 installation guide. 201
 pip install MACS2
 ```
 
--
+---
 
 Install **scipy** using conda
 
 ```bash
 conda install -c anaconda scipy
 ```
-
--
+---
 
 Install **numpy** using conda
 
@@ -867,7 +878,7 @@ conda install -c anaconda numpy
 
 Installed software from the bix2 software installation log to get the server up and running. Everything installed as root.
 
--
+---
 
 Install **RSEM** with conda
 
@@ -875,7 +886,7 @@ Install **RSEM** with conda
 conda install -c bioconda rsem
 ```
 
--
+---
 
 Install **IGV** with conda
 
@@ -883,7 +894,7 @@ Install **IGV** with conda
 conda install -c bioconda igv
 ```
 
--
+---
 
 Install **majiq** with C-lang (c compiler) and pip (as I did on bix2)
 
@@ -892,14 +903,14 @@ yum install zlib-devel
 conda install -c conda-forge clangdev
 pip install git+https://bitbucket.org/biociphers/majiq_stable.git#egg=majiq
 ```
--
+---
 
 Install **git** using conda
 
 ```bash
 conda install -c anaconda git 
 ```
--
+---
 
 Installed the **SRA Toolkit** using conda
 
@@ -907,7 +918,7 @@ Installed the **SRA Toolkit** using conda
 conda install -c bioconda sra-tools
 ```
 
--
+---
 
 Installed **deeptools** using conda
 
@@ -924,7 +935,7 @@ Installed **ATLAS** using yum
 ```bash
 yum install atlas
 ```
--
+---
 
 Installed **BLAS** and **LAPACK** using yum
 
@@ -940,7 +951,7 @@ Installed **subread** using conda
 conda install -c bioconda subread
 ```
 
--
+---
 
 Installed **UMI-tools** using conda
 
@@ -948,14 +959,14 @@ Installed **UMI-tools** using conda
 conda install -c bioconda -c conda-forge umi_tools
 ```
 
--
+---
 
 Installed **numpy** using conda
 
 ```bash
 conda install -c anaconda numpy
 ```
-- 
+---
 
 Installed **scipy** using conda
 
@@ -963,7 +974,7 @@ Installed **scipy** using conda
 conda install -c anaconda scipy
 ```
 
--
+---
 
 Installed **matplotlib** using conda
 
@@ -971,7 +982,7 @@ Installed **matplotlib** using conda
 conda install matplotlib
 ```
 
--
+---
 
 Installed **pyyaml** using conda
 
@@ -979,7 +990,7 @@ Installed **pyyaml** using conda
 conda install -c anaconda pyyaml
 ```
 
--
+---
 
 Installed **pysam** using conda
 
@@ -987,7 +998,7 @@ Installed **pysam** using conda
 conda install -c bioconda pysam
 ```
 
--
+---
 
 Installed **pyfasta** using conda
 
@@ -995,7 +1006,7 @@ Installed **pyfasta** using conda
 conda install -c bioconda pyfasta
 ```
 
--
+---
 
 Installed **STAR** using conda
 
@@ -1003,7 +1014,7 @@ Installed **STAR** using conda
 conda install -c bioconda star
 ```
 
--
+---
 
 Installed **fastqc** using conda
 
@@ -1011,7 +1022,7 @@ Installed **fastqc** using conda
 conda install -c bioconda fastqc
 ```
 
--
+---
 
 Installed **trim_galore** using conda
 
@@ -1019,7 +1030,7 @@ Installed **trim_galore** using conda
 conda install -c bioconda trim-galore
 ```
 
--
+---
 
 Installed **bowtie2** using conda
 
@@ -1027,7 +1038,7 @@ Installed **bowtie2** using conda
 conda install -c bioconda bowtie2
 ```
 
--
+---
 
 Installed **trimmomatic** using conda
 
@@ -1035,7 +1046,7 @@ Installed **trimmomatic** using conda
 conda install -c bioconda trimmomatic
 ```
 
--
+---
 
 Installed **vcftools** using conda
 
@@ -1043,7 +1054,7 @@ Installed **vcftools** using conda
 conda install -c bioconda vcftools
 ```
 
--
+---
 
 Installed **samtools** using conda
 
@@ -1063,7 +1074,7 @@ cd /usr/local/programs/anaconda3/lib
 ln -s libcrypto.so.1.1 libcrypto.so.1.0.0
 ```
 
--
+---
 
 Installed **bedtools** using conda
 
