@@ -1,5 +1,20 @@
 ## Coriell Bioinformatics Genome Log
 
+### mm10 / mm38
+
+#### Make STAR index
+*2019-10-08*
+
+```bash
+[kkeith]$ pwd
+/mnt/data/gdata/mouse/mm38_mm10_soft_masked
+### copy the necessary files from the archive Temple bix server
+[kkeith]$ cp /mnt/data/bix_server/disk36t/gdata/mouse/mm38_mm10_soft_masked/Mus_musculus.GRCm38.dna_sm.primary_assembly.fa ./
+[kkeith]$ cp /mnt/data/bix_server/disk36t/gdata/mouse/mm38_mm10/Mus_musculus.GRCm38.85.gtf ./
+### make the index
+[kkeith]$ STAR --runMode genomeGenerate --runThreadN 16 --genomeDir star_index_sm --genomeFastaFiles Mus_musculus.GRCm38.dna_sm.primary_assembly.fa --sjdbGTFfile Mus_musculus.GRCm38.85.gtf
+```
+
 ### hg38
 *2019-05-14*
 Downloaded the Ensembl gene annotations in GFF3 format from the NCBI ftp site

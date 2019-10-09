@@ -1,5 +1,132 @@
 # Software Installation Log
 
+*2019-10-09* Install R package **mclust**
+
+```bash
+[kkeith]$ su
+[root]# R
+> install.packages('mclust')
+```
+
+*2019-10-09* Install R package **cowplot**
+
+```bash
+[kkeith]$ su
+[root]# R
+> install.packages('cowplot')
+```
+
+*2019-10-09* Install R package **Seurat**
+
+```bash
+[kkeith]$ su
+[root]# R
+> install.packages('Seurat')
+```
+
+*2019-09-30* Install R package **pvclust**
+
+```bash
+[kkeith]$ su
+[root]# R
+
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-redhat-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> install.packages('pvclust')
+Installing package into ‘/usr/lib64/R/library’
+(as ‘lib’ is unspecified)
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'https://cloud.r-project.org/src/contrib/pvclust_2.0-0.tar.gz'
+Content type 'application/x-gzip' length 104057 bytes (101 KB)
+==================================================
+downloaded 101 KB
+
+* installing *source* package ‘pvclust’ ...
+** package ‘pvclust’ successfully unpacked and MD5 sums checked
+** R
+** data
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘pvclust’
+    finding HTML links ... done
+    lung                                    html  
+    msfit                                   html  
+    msplot                                  html  
+    plot.pvclust                            html  
+    print.pvclust                           html  
+    pvclust                                 html  
+    pvpick                                  html  
+    seplot                                  html  
+** building package indices
+** testing if installed package can be loaded
+* DONE (pvclust)
+Making 'packages.html' ... done
+
+The downloaded source packages are in
+	‘/tmp/Rtmpui3ej5/downloaded_packages’
+Updating HTML index of packages in '.Library'
+Making 'packages.html' ... done
+> q()
+Save workspace image? [y/n/c]: n
+[root@cbix uniq]# exit
+exit
+```
+
+#### Adding Packages to the Python2.7 Anaconda Environment
+*2019-09-20*
+
+Needed additional packages in the python2.7 environment to run the DREAM script
+
+```bash
+[kkeith]$ su
+[root]# conda activate python2.7
+(python2.7)[root]# conda activate python2.7
+(python2.7)[root]# conda install -c bioconda pysam
+(python2.7)[root]# pip install timex
+```
+-
+
+And install `timex` in the normal environment as well, should allow me to run the python3 version of the script.
+
+```bash
+### install same packages in the normal environment as well
+(python2.7)[root]# conda deactivate
+[root]# pip install timex
+```
+
+*2019-09-20* Organize DREAM folder in `/usr/local/programs`
+
+```bash
+[kkeith]$ cd /usr/local/programs/
+[kkeith]$ sudo mkdir dream
+[kkeith]$ sudo mv count_SmaI_CH3* dream/
+[kkeith]$ sudo cp /mnt/data/bix_server/disk36t/data_jj/dream/tools/dream_python/hg19c9eyhhv_smai_sites.txt ./
+[kkeith]$ ll dream
+total 12204
+-rwxrwxr-x. 1 root root    14520 Apr 22  2014 count_SmaI_CH3.py
+-rwxrwxr-x. 1 root root    14571 Mar 27 18:15 count_SmaI_CH3_py3.py
+-rw-r--r--. 1 root root 12462024 Sep 20 11:15 hg19c9eyhhv_smai_sites.txt
+[kkeith]$ sudo cp /mnt/data/bix_server/disk36t/data_jj/dream/tools/dream_r_human/print_stats_awk.sh /usr/local/programs/dream/
+[kkeith]$ sudo chmod 755 /usr/local/programs/dream/print_stats_awk.sh 
+```
+
 *2019-09-06* Installed R packages for working with/downloading GEO data **GEOmetadb**, **GEOquery**, and **SRAdb**
 
 ```bash
