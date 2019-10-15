@@ -1,5 +1,73 @@
 # Software Installation Log
 
+#### Install all the UCSC Tools in Their Own `conda` environment
+*2019-10-15*
+
+
+Because of compatibility issues with other software / `conda` stuff, many of the UCSC tools weren't installling in the main environment, so they went into their own environment.
+
+```bash
+[kkeith]$
+[root]# su
+
+### make the new conda environment
+(ucsc_tools)[root]# conda create --name ucsc_tools
+(ucsc_tools)[root]# conda activate ucsc_tools
+
+### install all the UCSC tools
+(ucsc_tools)[root]# conda install -c mvdbeek ucsc_tools
+
+### test installation
+(ucsc_tools)[root]# bigWigToBedGraph 
+bigWigToBedGraph: error while loading shared libraries: libssl.so.1.0.0: cannot open shared object file: No such file or directory
+
+### fix issue (as I have before) by making a softlink for libssl.so.1.0.0 to the most currect version of the library
+(ucsc_tools)[root]# cd /usr/local/programs/anaconda3/envs/ucsc_tools/lib/
+(ucsc_tools)[root]# ln -s libssl.so.1.1 libssl.so.1.0.0
+
+### test again
+(ucsc_tools)[root]# bigWigToBedGraph 
+bigWigToBedGraph: error while loading shared libraries: libcrypto.so.1.0.0: cannot open shared object file: No such file or directory
+
+### softlink libcrypto now
+(ucsc_tools)[root]# ln -s libcrypto.so.1.1 libcrypto.so.1.0.0
+
+### test again
+bigWigToBedGraph 
+bigWigToBedGraph - Convert from bigWig to bedGraph format.
+usage:
+   bigWigToBedGraph in.bigWig out.bedGraph
+options:
+   -chrom=chr1 - if set restrict output to given chromosome
+   -start=N - if set, restrict output to only that over start
+   -end=N - if set, restict output to only that under end
+   -udcDir=/dir/to/cache - place to put cache for remote bigBed/bigWigs
+
+### Now that works as root, test again as normal user, not root
+(ucsc_tools)[root]# conda deactivate
+[root]# exit
+[kkeith]$ conda activate ucsc_tools
+(ucsc_tools)[kkeith]$ bigWigToBedGraph 
+bigWigToBedGraph - Convert from bigWig to bedGraph format.
+usage:
+   bigWigToBedGraph in.bigWig out.bedGraph
+options:
+   -chrom=chr1 - if set restrict output to given chromosome
+   -start=N - if set, restrict output to only that over start
+   -end=N - if set, restict output to only that under end
+   -udcDir=/dir/to/cache - place to put cache for remote bigBed/bigWigs 
+```
+
+-
+
+*2019-10-09* Install R package **viridis**
+
+```bash
+[kkeith]$ su
+[root]# R
+> install.packages('viridis')
+```
+
 *2019-10-09* Install R package **mclust**
 
 ```bash
