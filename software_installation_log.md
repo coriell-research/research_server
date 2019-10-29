@@ -1,8 +1,16 @@
 # Software Installation Log
 
+*2019-10-22* Install **seqtk** with conda.
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda seqtk
+[root]# y
+[root]# exit
+```
+
 #### Install all the UCSC Tools in Their Own `conda` environment
 *2019-10-15*
-
 
 Because of compatibility issues with other software / `conda` stuff, many of the UCSC tools weren't installling in the main environment, so they went into their own environment.
 

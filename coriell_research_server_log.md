@@ -2,6 +2,70 @@
 IP address: 10.1.105.11
 
 ### Add New Users
+*2019-10-28* Added **Woonbok Chung** as a user
+
+```bash
+sudo useradd -g research wchung
+sudo passwd wchung
+mkdir /mnt/data/data_wc
+mkdir /mnt/data/data_wc/ncbi
+ln -s /mnt/data/data_wc/ /home/wchung/data
+ln -s /mnt/data/data_wc/ncbi/ /home/wchung/ncbi
+sudo chown -R wchung:research /home/wchung/
+sudo chmod -R 775 /home/wchung/
+sudo chown -R wchung:research /mnt/data/data_wc/
+sudo chmod -R 775 /mnt/data/data_wc/
+```
+
+*2019-10-28* Added **Hugh Huang** as a user
+
+```bash
+sudo useradd -g research hhuang
+sudo passwd hhuang
+mkdir /mnt/data/data_hh
+mkdir /mnt/data/data_hh/ncbi
+ln -s /mnt/data/data_hh/ /home/hhuang/data
+ln -s /mnt/data/data_hh/ncbi/ /home/hhuang/ncbi
+sudo chown -R hhuang:research /home/hhuang/
+sudo chmod -R 775 /home/hhuang/
+sudo chown -R hhuang /mnt/data/data_hh
+sudo chmod -R 775 /mnt/data/data_hh
+```
+
+*2019-10-28* Added **Hye Seon Jeong** as a user
+
+```bash
+sudo useradd -g research hsjeong
+sudo passwd hsjeong 
+mkdir /mnt/data/data_hsj
+mkdir /mnt/data/data_hsj/ncbi
+sudo ln -s /mnt/data/data_hsj /home/hsjeong/data
+ln -s /mnt/data/data_hsj/ncbi/ /home/hsjeong/ncbi
+sudo chown -R hsjeong:research /home/hsjeong
+sudo chmod -R 775 /home/hsjeong/
+sudo chown -R hsjeong /mnt/data/data_hsj
+sudo chmod -R 775 /mnt/data/data_hsj/
+```
+
+*2019-10-28* Added **Gennaro Calendo** as a user
+
+```bash
+sudo useradd -g research gcalendo
+sudo passwd gcalendo
+cd /mnt/data/
+mkdir data_gc
+mkdir data_pp/ncbi
+sudo chown -R gcalendo:research data_gc
+sudo chmod -R 775 data_gc/
+cd /home/
+sudo chmod -R 775 gcalendo/
+cd gcalendo/
+ln -s /mnt/data/data_gc/ data
+ln -s /mnt/data/data_gc/ncbi/ ncbi
+sudo chown -R gcalendo:research *
+sudo chmod -R 775 *
+```
+
 *2019-03-25*, Added **Peace Park** as a user
 
 ```bash
