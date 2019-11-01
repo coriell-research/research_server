@@ -1,5 +1,32 @@
 # Software Installation Log
 
+---
+
+**WARNING:** Before installing **R packages**, you need to go into `root`'s `.bash_profile` and uncomment the line `` and comment the line ``. This allows root `R` to find the libssl path correctly. **DONT' FORGET** to go back into the `.bash_profile` and swap it back when you're done!!!
+
+---
+
+*2019-11-01* Install Bioconductor gene annotation packages
+
+```bash
+[kkeith]$ su
+[root]# R
+# human
+> BiocManager::install("TxDb.Hsapiens.UCSC.hg19.knownGene")
+> BiocManager::install("TxDb.Hsapiens.UCSC.hg38.knownGene")
+# mouse
+> BiocManager::install("TxDb.Mmusculus.UCSC.mm9.knownGene")
+> BiocManager::install("TxDb.Mmusculus.UCSC.mm10.knownGene")
+```
+
+*2019-11-01* Updated all Bioconductor packages to version 3.9. This was required because the R version on the server is 3.6 and Bioconductor 3.8 only works up to R 3.5.
+
+```bash
+[kkeith]$ su
+[root]# R
+> BiocManager::install(version = "3.9")
+```
+
 *2019-10-22* Install **seqtk** with conda.
 
 ```bash
