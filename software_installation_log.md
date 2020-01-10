@@ -2,9 +2,215 @@
 
 ---
 
-**WARNING:** Before installing **R packages**, you need to go into `root`'s `.bash_profile` and uncomment the line `` and comment the line ``. This allows root `R` to find the libssl path correctly. **DONT' FORGET** to go back into the `.bash_profile` and swap it back when you're done!!!
+**WARNING:** Before installing **R packages**, you need to go into `root`'s `.bash_profile` and uncomment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/programs/anaconda3/lib/` and comment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib`. This allows root `R` to find the libssl path correctly. **DONT' FORGET** to go back into the `.bash_profile` and swap it back when you're done!!!
 
 ---
+
+*2020-01-10* Install Bioconductor R package for copy number analysis for partial genome sequencing
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bashrc
+[root]# source ~/.bashrc
+[root]# R
+> BiocManager::install("PureCN")
+> library(PureCN)
+> q()
+[root]# nano ~/.bashrc
+[root]# source ~/.bashrc
+```
+
+*2020-01-08* Install CNVkit for copy number analysis
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda cnvkit
+UnsatisfiableError: The following specifications were found to be incompatible with each other:
+
+# put it in it's own environment
+[root]# conda create --name cnvkit
+[root]# conda activate cnvkit
+(cnvkit)[root]# conda install -c bioconda cnvkit
+UnsatisfiableError: The following specifications were found to be incompatible with each other:
+
+# install with pip
+[root]# pip install cnvkit
+```
+
+*2020-01-06* Install MultiQC for quality control report aggregating
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda multiqc
+UnsatisfiableError: The following specifications were found                                                              
+to be incompatible with the existing python installation in your environment:
+
+Specifications:
+
+  - multiqc -> python[version='2.7.*|3.5.*']
+  - multiqc -> python[version='>=2.7,<2.8.0a0|>=3.5,<3.6.0a0']
+
+Your python: python=3.7
+
+If python is on the left-most side of the chain, that's the version you've asked for.
+When python appears to the right, that indicates that the thing on the left is somehow
+not available for the python version you are constrained to. Note that conda will not
+change your python version to a different minor version unless you explicitly specify
+that.
+
+The following specifications were found to be incompatible with each other:
+
+
+
+Package ca-certificates conflicts for:
+python=3.7 -> openssl[version='>=1.0.2p,<1.0.3a'] -> ca-certificates
+multiqc -> python=3.5 -> ca-certificates
+Package wheel conflicts for:
+multiqc -> python=3.5 -> pip -> wheel
+python=3.7 -> pip -> wheel
+Package pip conflicts for:
+multiqc -> python=3.5 -> pip
+python=3.7 -> pip
+Package setuptools conflicts for:
+python=3.7 -> pip -> setuptools
+multiqc -> setuptools
+Package certifi conflicts for:
+python=3.7 -> pip -> setuptools -> certifi[version='>=2016.09|>=2016.9.26']
+
+# SOLUTION: install MutliQC in its own 
+[root]# conda create --name multiqc
+[root]# conda activate multiqc
+[root]# conda install -c bioconda multiqc
+[root]# conda deactive multiqc
+[root]# exit
+```
+
+-
+
+*2019-12-18* Install R package **caret** for machine learning
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]# R
+> install.packages('caret')
+> q()
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+```
+
+*2019-12-17* Install **xclip** and **xsel** for copying to clipboard
+
+```bash
+[kkeith]$ sudo yum install xclip
+[kkeith]$ sudo yum install xsel
+```
+
+*2019-12-06* Install R Bioconductor package **liftOver** for translating genomic coordinates to other genomes.
+
+```bash
+> BiocManager::install("liftOver")
+```
+
+*2019-12-06* Install R package **vroom** for fast reading of rectangular data
+
+```bash
+> install.packages('vroom')
+```
+
+*2019-12-04* Install **ANNOVAR**
+
+Downloaded ANNOVAR from the program website <http://annovar.openbioinformatics.org/en/latest/user-guide/download/>. I filled out the form at the link as directed and got an emailed link to download ANNOVAR. The folder was uploaded to my home directory on the server using Macfusion, then installed using the code below. ANNOVAR also requires annotation databases to work with; I downloaded the suggested databases to start with, but a full list of the available databases is at the link <http://annovar.openbioinformatics.org/en/latest/user-guide/download/>
+
+```bash
+[kkeith]$ pwd
+/home/kkeith
+[kkeith]$ cd /usr/local/programs/
+[kkeith]$ sudo chown -R root:root annovar
+
+### download databases for ANNOVAR; these are the ones suggested in the getting started documentation but more are available
+[kkeith]$ sudo perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGene humandb/
+[kkeith]$ sudo perl annotate_variation.pl -buildver hg19 -downdb cytoBand humandb/
+[kkeith]$ sudo perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar exac03 humandb/ 
+[kkeith]$ sudo perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar avsnp147 humandb/ 
+[kkeith]$ sudo perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp30a humandb/
+
+# install genocode annotations instead
+[kkeith]$ sudo perl annotate_variation.pl -buildver hg19 -downdb -webfrom annovar ensGene humandb/
+```
+
+*2019-11-21* Install R package **dbplyr** for using tidyverse syntax to query SQL tables
+
+```bash
+[kkeith]$ su
+# went and edited root's .bash_profile as noted above
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]$ R
+> install.packages('dbplyr')
+> q()
+Save workspace image? [y/n/c]: n
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]# exit
+```
+
+*2019-11-21* Install R package **dtplyr** for faster data processing using tidyverse syntax with data.tables
+
+```bash
+[kkeith]$ su
+# went and edited root's .bash_profile as noted above
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]$ R
+> install.packages('dtplyr')
+> q()
+Save workspace image? [y/n/c]: n
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]# exit
+```
+
+*2019-11-21* Install R package **data.table** for faster data processing
+
+```bash
+[kkeith]$ su
+# went and edited root's .bash_profile as noted above
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]$ R
+> install.packages('data.table')
+> q()
+Save workspace image? [y/n/c]: n
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]# exit
+```
+
+*2019-11-12* Install Bioconductor package **ChAMP** for 450K array normalization and analysis
+
+```bash
+[kkeith]$ su
+# went and edited root's .bash_profile as noted above
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]$ R
+> BiocManager::install("ChAMP")
+> q()
+Save workspace image? [y/n/c]: n
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]# exit
+```
+
+*2019-11-07* Install Bioconductor package **TCGAbiolinks** for downloading TCGA data
+
+```bash
+[kkeith]$ su
+[root]# R
+> BiocManager::install("TCGAbiolinks")
+```
 
 *2019-11-01* Install Bioconductor gene annotation packages
 
