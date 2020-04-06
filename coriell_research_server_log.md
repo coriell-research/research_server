@@ -1,6 +1,15 @@
 # Coriell Research Server
 IP address: 10.1.105.11
 
+### Add Sudo Users
+*2020-01-22* Add **Gennaro Calendo** as a sudo user
+
+```bash
+# edited /etc/sudoers to add Gennaro
+[kkeith]$ sudo nano /etc/sudoers
+gcalendo        ALL=(ALL)	ALL
+```
+
 ### Add New Users
 *2019-10-28* Added **Woonbok Chung** as a user
 

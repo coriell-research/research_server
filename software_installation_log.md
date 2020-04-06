@@ -6,18 +6,59 @@
 
 ---
 
-*2020-01-10* Install Bioconductor R package for copy number analysis for partial genome sequencing
+*2020-03-13* Install **RSeQC** for in-depth RNA-seq quality analysis
 
 ```bash
 [kkeith]$ su
-[root]# nano ~/.bashrc
-[root]# source ~/.bashrc
+[root]# conda create --name rseqc
+[root]# conda activate rseqc
+(rseqc)[root]# conda install -c bioconda rseqc
+(rseqc)[root]# conda deactivate
+[root]# exit
+# test program as normal user
+[kkeith]$ conda activate rseqc
+[kkeith]$ bam_stat.py
+Usage: bam_stat.py [options]
+
+Summarizing mapping statistics of a BAM or SAM file. 
+
+
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -i INPUT_FILE, --input-file=INPUT_FILE
+                        Alignment file in BAM or SAM format.
+  -q MAP_QUAL, --mapq=MAP_QUAL
+                        Minimum mapping quality (phred scaled) to determine
+                        "uniquely mapped" reads. default=30
+```
+
+*2020-02-03* Install Bioconductor R package **epihet** for methylation heterogeneity analysis.
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+[root]# R
+> Biocmanager::install("epihet")
+>
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
+```
+
+*2020-01-10* Install Bioconductor R package **PuerCN** for copy number analysis for partial genome sequencing
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
 [root]# R
 > BiocManager::install("PureCN")
 > library(PureCN)
 > q()
-[root]# nano ~/.bashrc
-[root]# source ~/.bashrc
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile
 ```
 
 *2020-01-08* Install CNVkit for copy number analysis
