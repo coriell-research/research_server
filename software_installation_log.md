@@ -6,6 +6,64 @@
 
 ---
 
+*2020-05-29* Install R package **statVisual** to do PVCA analysis and it's dependency from Bioconductor **pvca**
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> BiocManager::install("pvca")
+> install.packages('statVisual')
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+```
+
+*2020-04-22* Install R packages **DMwR** and **Rlof** for local outlier factor (LOF) analysis
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> install.packages('DMwR')
+> install.packages('Rlof')
+> q()
+Save workspace image? [y/n/c]: n
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# exit
+```
+
+*2020-04-20* Install R package **simplecolors** for simple color selection for ggplot
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> install.packages('simplecolors')
+> q()
+Save workspace image? [y/n/c]: n
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# exit
+```
+
+*2020-04-09* Install **FLASh** for Fast Length Adjustment of Short Reads, basically merging paired-end reads together
+
+```bash
+[kkeiht]$ su
+[root]# conda install -c bioconda flash
+[root]# flash
+Usage: flash [OPTIONS] MATES_1.FASTQ MATES_2.FASTQ
+Run `flash --help | less' for more information.
+[root]# exit
+[kkeith]$ 
+```
+
+-
+
 *2020-03-13* Install **RSeQC** for in-depth RNA-seq quality analysis
 
 ```bash
@@ -1229,7 +1287,7 @@ Install packages for everyone
 ```bash
 [kkeith]$ su
 [root]# R
-> install.pacakges('tidyverse')
+> install.packages('tidyverse')
 > install.packages('conflicted')
 > install.packages('viridis')
 > install.packages('broom')
@@ -1664,5 +1722,5 @@ Do you wish to proceed with the installation of Microsoft VSCode? [yes|no]
 ### Install R and RStudio Server
 *2019-03-12*
 
-See `install_r_studio.mdll`
+See `install_r_studio.md`
 

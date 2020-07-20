@@ -2,6 +2,13 @@
 
 ### mm10 / mm38
 
+#### Make Bismark index
+*2020-05-18*
+
+```bash
+
+```
+
 #### Make STAR index
 *2019-10-08*
 
