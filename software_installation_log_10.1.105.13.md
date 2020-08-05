@@ -225,3 +225,148 @@ Save workspace image? [y/n/c]: n
 ```bash
 [root]# mkdir /usr/local/programs
 ```
+
+---
+
+## Adventures in installing R 4.0.2
+
+2020-08-04 GC
+
+### Download newest version from CRAN and extract
+
+```shell
+curl -O https://cran.r-project.org/src/base/R-4/R-4.0.2.tar.gz
+tar -xvzf R-4.0.2.tar.gz
+cd R-4.0.2/
+```
+
+### Configure the installation
+
+Since blas and lapack have already been installed set the flags in the config step.
+
+```shell
+# enable shared libs, blas and libpack
+sudo ./configure --prefix=/opt/R/R-4.0.2 \
+		 --enable-memory-profiling \
+		 --enable-R-shlib \
+		 --with-blas \
+		 --with-lapack
+# build
+sudo make
+sudo make install
+```
+
+## Test build 
+
+```shell
+make check  # --> all ..OK
+/opt/R/R-4.0.2/bin/R --version  # 4.0.2
+```
+
+### Fix `yum`
+
+`yum --help` returned an error due to the `export LD_LIBRARY_PATH` line in root's ~/.bash_profile. **Commented out the exports in /home/root/.bash_profile** and re-sourced. `yum` works as expected now. These lines could be deleted now but I'll leave them in in case I need to backtrack.
+
+### Remove R 3.6.0
+
+`sudo yum remove R -y`
+
+Softlink new R version to old bin location.
+
+`sudo ln -s /opt/R/R-4.0.2/bin/R /usr/local/bin/R`
+`sudo ln -s /opt/R/R-4.0.2/bin/Rscript /usr/local/bin/Rscript`
+
+Test the new version
+
+`which R` --> "/usr/local/bin/R"
+
+`R --version` --> "R version 4.0.2 (2020-06-22) -- "Taking Off Again"`
+
+### Fix `sudo R --version`
+
+`sudo R --version` was looking for the old R version in `/bin/R`. Remove the old binary and link to the new installation:
+
+`sudo rm /bin/R /bin/Rscript`
+
+`sudo ln -s /opt/R/R-4.0.2/bin/R /bin/R`
+
+`sudo ln -s /opt/R/R-4.0.2/bin/Rscript /bin/Rscript` 
+
+### Install open-ssl for R packages
+
+Needed before `install.packages()` is run.
+
+`sudo yum install openssl-devel -y`
+
+### Install devtoolset-7 for R
+
+`tidyverse` installation was throwing errors because of the cpp compiler used by centOS (an old version of gcc, 4.8.x). Install the newest `gcc` version, tell R where to look, and try again.
+
+```shell
+sudo yum install centos-release-scl
+sudo yum install devtoolset-7
+scl enable devtoolset-7 bash # to test gcc version
+```
+
+Now, edit the Makeconf file that R uses to pick compilers. Change the following lines in /opt/R/R-4.0.2/etc/Makeconf:
+
+the link below was helpful:
+
+[link](https://github.com/vspinu/mlvocab/blob/master/travis/before_install.sh#L8-L13)
+
+```shell
+CC = /opt/rh/devtoolset-7/root/bin/gcc -std=gnu99
+CXX = /opt/rh/devtoolset-7/root/bin/g++ -std=gnu++11
+CXX11 = /opt/rh/devtoolset-7/root/bin/g++ -std=c++11
+```
+
+I think this eliminates the need to mess with the LD_LIBRARY path as well.
+
+### Install R packages
+
+```shell
+# following `sudo R`
+install.packages('tidyverse')
+install.packages('devtools')
+install.packages('DBI')
+install.packages('odbc')  # required sudo yum install unixODBC-devel first
+install.packages('viridis')
+install.packages('pheatmap')
+install.packages('vroom')
+install.packages('patchwork')
+install.packages('lubridate')
+install.packages('data.table')
+
+# bio
+install.packages('BiocManager')
+BiocManager::install("plyranges")
+BiocManager::install("DESeq2")
+BiocManager::install("edgeR")
+```
+
+### Remove old .libPaths() directory
+
+`sudo rm -r /usr/local/lib64/R`
+
+### Create Renviron.site file for startup to find right location of libraries for all users
+
+`sudo touch /opt/R/R-4.0.2/etc/Renviron.site`
+
+Add the following lines to the Renviron.site file
+
+```shell
+R_LIBS=/opt/R/R-4.0.2/library
+R_LIBS_USER=/opt/R/R-4.0.2/library
+```
+
+### Allow access to Rstudio server
+
+Opened port through firewall
+
+`sudo firewall-cmd --permanent --zone=public --add-port=8787/tcp`
+
+Reload firewall to apply settings
+
+`sudo firewall-cmd --reload`
+
+Point web browser at http://cbix2_server_ip:8787/ to check --> SUCCESS
