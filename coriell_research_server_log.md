@@ -11,6 +11,20 @@ gcalendo        ALL=(ALL)	ALL
 ```
 
 ### Add New Users
+*2020-09-14* Added **Alissa Reisch** as a user
+
+```bash
+sudo useradd -g permed aresch
+sudo passwd aresch
+mkdir /mnt/data/data_ar
+sudo ln -s /mnt/data/data_ar/ /home/aresch/data
+sudo chown -R aresch:permed /home/aresch/
+sudo chmod -R /home/aresch/
+sudo chmod -R 775 /home/aresch/
+sudo chown -R aresch:permed /mnt/data/data_ar/
+sudo chmod -R 775 /mnt/data/data_ar/
+```
+
 *2019-10-28* Added **Woonbok Chung** as a user
 
 ```bash

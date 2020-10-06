@@ -2,9 +2,48 @@
 
 ---
 
-**WARNING:** Before installing **R packages**, you need to go into `root`'s `.bash_profile` and uncomment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/programs/anaconda3/lib/` and comment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib`. This allows root `R` to find the libssl path correctly. **DONT' FORGET** to go back into the `.bash_profile` and swap it back when you're done!!!
+**WARNING:** Before installing **R packages**, you need to go into `root`'s `.bash_profile` and uncomment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/programs/anaconda3/lib/` and comment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib`. This allows root `R` to find the libssl path correctly. **DONT' FORGET** to go back into the `.bash_profile` and swap it back when you're done!!! You must also `source ~/.bash_profile` so R can find the `$LD_LIBRARY_PATH` before starting R
 
 ---
+
+*2020-07-27* Install **gg3d** for making 3D plots with `ggplot2`
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> devtools::install_github("AckerDWM/gg3D")
+> q()
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+```
+
+*2020-07-23* Install **genommation** for annotating genomic regions
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> BiocManager::install("genomation")
+> q()
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+```
+
+*2020-07-20* **DESeq2** wasn't installed, so installed to test for new server and because it's useful
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> BiocManager::install("DESeq2")
+> q()
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+```
 
 *2020-05-29* Install R package **statVisual** to do PVCA analysis and it's dependency from Bioconductor **pvca**
 
