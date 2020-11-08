@@ -7,6 +7,16 @@
 
 ---
 
+*2020-10-09* Install `ggupset` for ggplot UpSet plots
+
+```bash
+[kkeith]$ su
+[root]# R
+> install.packages('ggupset')
+> q()
+[root]# exit
+```
+
 *2020-10-02* Install `GO.db`, `org.Hs.eg.db`, `org.Mm.eg.db`, `fgsea`, and `reactome.db` packages for pathway analysis
 
 ```bash

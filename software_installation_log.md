@@ -6,6 +6,33 @@
 
 ---
 
+*2020-07-27* Install **broom.mixed** for tidy wrangling of even more models in R
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> install.packages('broom.mixed')
+> q()
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+```
+
+*2020-11-04* Install **fastp** for all-in-one preprocessing for FastQ files.
+
+```bash
+[kkeith]$ su
+[root]# conda install -c bioconda fastp
+[root]# exit
+[kkeith]$ fastp
+fastp
+fastp: an ultra-fast all-in-one FASTQ preprocessor
+version 0.20.1
+usage: fastp [options] ... 
+... 
+```
+
 *2020-07-27* Install **gg3d** for making 3D plots with `ggplot2`
 
 ```bash
