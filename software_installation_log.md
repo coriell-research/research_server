@@ -6,6 +6,33 @@
 
 ---
 
+*2020-12-15* Install R packages **ggupset** for plotting UpSet plots that are class `ggplot`
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> install.packages('ggupset')
+> q()
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+```
+
+*2020-12-09* Install R packages **ggplotify** for coercing other plot types to ggplots and Gennaro's custom Coriell package for common tasks
+
+```bash
+[kkeith]$ su
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+[root]# R
+> install.packages('ggplotify')
+> devtools::install_github("coriell-research/coriell")
+> q()
+[root]# nano ~/.bash_profile
+[root]# source ~/.bash_profile 
+```
+
 *2020-07-27* Install **broom.mixed** for tidy wrangling of even more models in R
 
 ```bash

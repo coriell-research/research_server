@@ -18,11 +18,12 @@ sudo mount /dev/md0 /mnt/data
 Update `yum` and `conda` and R packages
 
 ```bash
-### update yum
-sudo yum update
-### update conda
 su
+### update yum
+yum update
+### update conda
 conda update conda
+conda update --all
 ### update R packages
 R
 update.packages() # may want to include ask = F, so you don't have to approve every package update
