@@ -6,6 +6,32 @@
 
 ---
 
+*2021-01-05* The `ChAMP` package wouldn't reinstall after updating R, because `Error: C++14 standard requested but CXX14 is not defined`. The root of the problem was the dependency `sparseMatrixStats`, which, after googling, has a whole section in the README about the issues with the C++14 compiler. Followed the instructions to specify the C++14 compiler info in R while installing and `sparseMatrixStats` installed perfectly. Then `ChAMP` installed correctly.
+
+```r
+withr::with_makevars(
+ new = c(CXX14 = "/opt/rh/devtoolset-8/root/usr/bin/g++", 
+         CXX14FLAGS = "-g -O2 $(LTO)", CXX14PICFLAGS = "-fpic",
+         CXX14STD = "-std=gnu++14"), 
+ code = {
+   BiocManager::install("sparseMatrixStats")
+ })
+```
+
+*2021-01-05* R was throwing an error `libicui18n.so.58: cannot open shared object file: No such file or directory`, so following the advice in this <https://github.com/igraph/rigraph/issues/274> GitHub issue, updated the ICU library for unicode to ICU 58 which fixed the issue
+
+```bash
+wget https://github.com/unicode-org/icu/archive/release-58-3.tar.gz
+tar xvzf release-58-3.tar.gz
+cd icu-release-58-3/icu4c/source
+./configure
+make
+make install
+cd ../../../
+rm -rf icu-release-58-3
+rm release-58-3.tar.gz
+```
+
 *2020-12-15* Install R packages **ggupset** for plotting UpSet plots that are class `ggplot`
 
 ```bash
