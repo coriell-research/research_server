@@ -6,6 +6,56 @@
 
 ---
 
+*2021-03-12* Install `salmon`
+
+```bash
+[root]# cd /usr/local/programs
+[root]# mkdir salmon
+[root]# cd salmon
+[root]# wget https://github.com/COMBINE-lab/salmon/releases/download/v1.4.0/salmon-1.4.0_linux_x86_64.tar.gz
+[root]# tar xavf salmon-1.4.0_linux_x86_64.tar.gz
+# add alias for path
+[root]# nano /etc/profile.d/alias.sh
+# alias salmon='/usr/local/programs/salmon/salmon-latest_linux_x86_64/bin/salmon'
+```
+
+*2021-03-12* Install `cmake`. Followed instructions here <https://gist.github.com/1duo/38af1abd68a2c7fe5087532ab968574e>
+
+```bash
+[root]# cd /usr/local/programs
+[root]# wget https://cmake.org/files/v3.12/cmake-3.12.3.tar.gz
+[root]# tar zxvf cmake-3.*
+[root]# cd cmake-3.*
+[root]# ./bootstrap --prefix=/usr/local
+[root]# make -j$(nproc)
+[root]# make install
+# verify installation
+[root]# /usr/local/programs/cmake-3.12.3/bin/cmake --version
+# add alias for path
+[root]# nano /etc/profile.d/alias.sh
+# alias cmake='/usr/local/programs/cmake-3.12.3/bin/cmake'
+```
+
+
+*2021-03-10* Jozef updated `gcc` to the lastest version 7.3.1
+
+```bash
+[root]# gcc --version
+gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[root]# yum group install "Development Tools"
+[root]# sudo yum install centos-release-scl
+[root]# sudo yum install devtoolset-7
+[root]# scl enable devtoolset-7 bash
+[root]# gcc --version
+gcc (GCC) 7.3.1 20180303 (Red Hat 7.3.1-5)
+Copyright (C) 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
 *2021-01-05* The `ChAMP` package wouldn't reinstall after updating R, because `Error: C++14 standard requested but CXX14 is not defined`. The root of the problem was the dependency `sparseMatrixStats`, which, after googling, has a whole section in the README about the issues with the C++14 compiler. Followed the instructions to specify the C++14 compiler info in R while installing and `sparseMatrixStats` installed perfectly. Then `ChAMP` installed correctly.
 
 ```r
