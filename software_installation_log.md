@@ -1,5 +1,132 @@
 # Software Installation Log
 
+## 2021-03-09 Install R-4.0.4
+
+Enter root shell as root, download pre-compiled binary from RStudio repo, install with yum
+
+```bash
+sudo su -  # enter user pwd
+
+# get pre-built package from rstudio
+curl -O https://cdn.rstudio.com/r/centos-7/pkgs/R-4.0.4-1-1.x86_64.rpm
+
+# install with yum
+yum install R-4.0.4-1-1.x86_64.rpm
+```
+
+The default install location is `/opt/R/4.0.4/R`
+
+link `which R` and `which Rscript` to new R binaries.
+
+```bash
+which R      # determine old R path (/usr/local/bin/R)
+mv /usr/local/bin/R /usr/local/bin/R.old                  # mv old version (can delete later)
+mv /usr/local/bin/Rscript /usr/local/bin/Rscript.old      # mv old version (can delete later)
+cd /usr/local/bin  # change into bin dir
+ln -s /opt/R/4.0.4/bin/R R    # link new versions
+ln -s /opt/R/4.0.4/bin/Rscript Rscript
+```
+
+Change compiler flags in Makeconf. This step allows newer packages to compile with the new version of g++.
+
+```bash
+cd /opt/R/4.0.4/lib/R/etc
+
+vim Makeconf  # to edit the Makeconf file
+```
+
+Set compilers and flags to newest versions 
+
+```
+CC = /opt/rh/devtoolset-8/root/bin/gcc -std=gnu99                        ## HERE
+CFLAGS = -g -O2 $(LTO)
+CPICFLAGS = -fpic                                                        ## SHOULD BE SET ALREADY
+CPPFLAGS = -I/usr/local/include
+CXX = /opt/rh/devtoolset-8/root/bin/g++ -std=gnu++11                     ## HERE
+
+## Not used by anything in R, in particular not for the .cc.d rule
+## but used via R CMD config by several packages
+CXXCPP = $(CXX) -E
+CXXFLAGS = -g -O2 $(LTO)
+CXXPICFLAGS = -fpic
+CXX11 = /opt/rh/devtoolset-8/root/bin/g++                                ## HERE
+CXX11FLAGS = -g -O2 $(LTO)
+CXX11PICFLAGS = -fpic                                                    ## HERE
+CXX11STD = -std=gnu++11                                                  ## HERE
+CXX14 = /opt/rh/devtoolset-8/root/bin/g++                                ## HERE
+CXX14FLAGS =  $(LTO)
+CXX14PICFLAGS = -fpic                                                    ## HERE
+CXX14STD = -std=gnu++14                                                  ## HERE
+CXX17 = /opt/rh/devtoolset-8/root/bin/g++                                ## HERE
+CXX17FLAGS =  $(LTO) 
+CXX17PICFLAGS = -fpic                                                    ## HERE
+CXX17STD = -std=gnu++17                                                  ## HERE
+CXX20 = /opt/rh/devtoolset-8/root/bin/g++                                ## HERE
+CXX20FLAGS =  $(LTO)
+CXX20PICFLAGS = -fpic                                                    ## HERE
+CXX20STD = -std=gnu++20                                                  ## HERE
+```
+
+### 2021-03-09 Manually install new curl
+
+Installing packages sometimes resulted in this error:
+
+```R
+R> curl::new_handle() 
+Error in curl::new_handle() : An unknown option was passed in to libcurl
+```
+
+The curl binary (updated by yum, older) was using libs managed by anaconda (newer) and R couldn't resolve the right libraries to use. softlinking to the anaconda curl libs didn't help so I decided to install curl from source, outside of yum. This fixed the problem since (I think) now the binary uses headers from the same version, which wasn't the case before.
+
+```bash
+# set clean root PATH
+PATH=$(getconf PATH)
+
+# get curl source
+wget https://curl.haxx.se/download/curl-7.67.0.tar.gz
+
+# unzip and untar
+gunzip -c curl-7.67.0.tar.gz | tar xvf -
+
+# change into curl directory
+cd curl-7.67.0
+
+# configure, make, make install
+./configure --with-ssl --without-brotli
+make
+make install
+
+# check
+which curl # --> /usr/local/bin/curl
+/usr/local/bin/curl --version  #--> curl 7.67.0 (x86_64-pc-linux-gnu) libcurl/7.67.0 OpenSSL/1.1.1g zlib/1.2.7
+which curl-config  # --> /usr/local/bin/curl-config
+/usr/local/bin/curl-config --libs # -L/usr/local/lib -lcurl (good, not path to anaconda libs)
+```
+
+## Update RStudio Server
+
+[Follow instructions here](https://support.rstudio.com/hc/en-us/articles/216079967-Upgrading-RStudio-Server)
+
+
+## Install R packages
+
+Installed R packages from `../r_packages.csv`. 
+
+```R
+# download the packages file
+download.file("https://raw.githubusercontent.com/coriell-research/research_server/master/r_packages.csv", 'r_packages.csv')
+
+pkg_df <- read.csv("r_packages.csv")
+cran_pkgs <- pkg_df[, "cran_packages"]
+
+# Install packages from CRAN
+install.packages(cran_packages,  repos='http://cran.us.r-project.org')
+
+# do the same for Bioconductor, etc.
+```
+
+Some packages had errors which were solved on an individual basis if encountered. Additional packages were also installed.
+
 ---
 
 **WARNING:** Before installing **R packages**, you need to go into `root`'s `.bash_profile` and uncomment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/programs/anaconda3/lib/` and comment the line `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib`. This allows root `R` to find the libssl path correctly. **DONT' FORGET** to go back into the `.bash_profile` and swap it back when you're done!!! You must also `source ~/.bash_profile` so R can find the `$LD_LIBRARY_PATH` before starting R
